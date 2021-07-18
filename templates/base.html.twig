@@ -14,6 +14,7 @@
         {% endblock %}
     </head>
     <body>
+        {% include "_layouts/flash-message.html.twig" %}
         {% block header %}{% endblock %}
         {% block body %}
             {% block adminContent %}{% endblock %}
