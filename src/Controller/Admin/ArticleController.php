@@ -73,6 +73,8 @@ class ArticleController extends AdminController
             $doctrine = $this->getDoctrine()->getManager();
             $doctrine->persist($article);
             $doctrine->flush();
+            return $this->redirectToRoute('admin_articles_list');
+
         }
 
         return $this->render('admin/article/create.html.twig', [
