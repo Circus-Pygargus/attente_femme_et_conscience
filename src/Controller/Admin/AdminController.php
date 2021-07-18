@@ -28,6 +28,7 @@ class AdminController extends AbstractController
         ];
         $this->contentNavigation = [
             'title' => 'Gestion',
+            'inUseRegex' => 'admin_articles',
             'adminLinks' => [
                 [
                     'label' => 'Articles',

@@ -32,7 +32,7 @@
         {% for link in contentNavigation.adminLinks %}
             <a href="{{ path(link.urlPath) }}"
                 class="link
-                {% if navigationInfos|last.urlPath == link.urlPath %}
+                {% if link.urlPath starts with contentNavigation.inUseRegex %}
                     selected
                 {% endif %}
                 "

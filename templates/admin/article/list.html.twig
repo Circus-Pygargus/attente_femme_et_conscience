@@ -3,7 +3,7 @@
 {% block adminContent %}
     <h2 class="title">Gérer les articles</h2>
 
-    <div><a href="#" class="btn btn-inverted">Créer</a></div>
+    <div><a href="{{ path('admin_articles_create') }}" class="btn btn-inverted">Créer</a></div>
 
     {% if articles|length > 0 %}
     <table class="table">

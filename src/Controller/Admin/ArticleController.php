@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AdminController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -37,6 +38,28 @@ class ArticleController extends AdminController
             'navigationInfos' => $this->navigationInfos,
             'contentNavigation' => $this->contentNavigation,
             'articles' => $articles
+        ]);
+    }
+
+    /**
+     * @Route("/create", name="create")
+     */
+    public function create (Request $request)
+    {
+        $this->navigationInfos[] = [
+            'text' => 'Gérer les articles',
+            'urlPath' => 'admin_articles_list'
+        ];
+        $this->navigationInfos[] = [
+            'text' => 'Créer un article',
+            'urlPath' => 'admin_articles_create'
+        ];
+        $this->contentNavigation['inUseRegex'] = 'admin_articles';
+
+        return $this->render('admin/article/create.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation
         ]);
     }
 }
