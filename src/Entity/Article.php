@@ -33,15 +33,14 @@ class Article
      * @ORM\Column(type="string", length=255)
      */
     private $title;
-
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $featuredImage;
 
     /**
-     * Vich\UploadableField(mapping="featured_images", fileNameProperty="featured_image")
+     * @Vich\UploadableField(mapping="featured_images", fileNameProperty="featured_image")
      * @var File
      */
     private $imageFile;
