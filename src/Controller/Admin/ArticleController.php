@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AdminController;
 use App\Entity\Article;
 use App\Form\AddArticleFormType;
+use App\Repository\KeyWordRepository;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -62,6 +64,17 @@ class ArticleController extends AdminController
 
         $form = $this->createForm(AddArticleFormType::class, $article);
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $article->setUser($this->getUser());
+            // Todo décommenter une fois functionnel
+//            $article = $this->handleKeyWordsOnCreation($article);
+            $doctrine = $this->getDoctrine()->getManager();
+            $doctrine->persist($article);
+            $doctrine->flush();
+        }
+
         return $this->render('admin/article/create.html.twig', [
             'heroImgName' => $this->heroImgName,
             'navigationInfos' => $this->navigationInfos,
@@ -69,4 +82,26 @@ class ArticleController extends AdminController
             'articleForm' => $form->createView()
         ]);
     }
+
+
+
+    /**
+     * Récupère les mot-clés du form de création d'article
+     * Enregistre les nouveaux mots clés en base
+     *
+     * @var Article
+     * @return Article contenant la collection de KeyWord
+     */
+//    public function handleKeyWordsOnCreation (Article $article): Article
+//    {
+//        $keyWordsCollection = [];
+//        $keyWordsArray = explode(',', $article->getKeyWordsString());
+//        $keyWordRepo = new KeyWordRepository();
+//        foreach ($keyWordsArray as $keyWordStr) {
+//            $keyWord = $keyWordRepo->findOneBy(['$keyWord' => $keyWordStr]);
+//
+//        }
+//
+//        return $keyWordsCollection;
+//    }
 }

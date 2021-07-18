@@ -30,7 +30,7 @@ class AddArticleFormType extends AbstractType
             ->add('published', CheckboxType::class, [
                 'label' => 'Publié'
             ])
-            ->add('keyWords', TextType::class, [
+            ->add('keyWordsString', TextType::class, [
                 'label' => 'Mots clés'
             ])
             ->add('Enregistrer', SubmitType::class)
