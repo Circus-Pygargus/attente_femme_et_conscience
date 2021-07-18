@@ -6,6 +6,7 @@ use App\Entity\Article;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,6 +33,7 @@ class AddArticleFormType extends AbstractType
             ->add('keyWords', TextType::class, [
                 'label' => 'Mots clés'
             ])
+            ->add('Enregistrer', SubmitType::class)
         ;
     }
 
