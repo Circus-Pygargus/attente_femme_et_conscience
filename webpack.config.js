@@ -85,7 +85,8 @@ Encore
     .addPlugin(
         new CopyPlugin({
             patterns: [
-                { from: './assets/img', to: 'img' }
+                { from: './assets/img', to: 'img' },
+                { from: './assets/bundles', to: 'bundles' }
             ]
         }),
     )
