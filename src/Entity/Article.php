@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -65,6 +67,16 @@ class Article
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=KeyWord::class, inversedBy="articles")
+     */
+    private $keyWords;
+
+    public function __construct()
+    {
+        $this->keyWords = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -142,6 +154,30 @@ class Article
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|KeyWord[]
+     */
+    public function getKeyWords(): Collection
+    {
+        return $this->keyWords;
+    }
+
+    public function addKeyWord(KeyWord $keyWord): self
+    {
+        if (!$this->keyWords->contains($keyWord)) {
+            $this->keyWords[] = $keyWord;
+        }
+
+        return $this;
+    }
+
+    public function removeKeyWord(KeyWord $keyWord): self
+    {
+        $this->keyWords->removeElement($keyWord);
 
         return $this;
     }
