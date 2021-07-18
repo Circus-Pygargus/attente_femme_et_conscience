@@ -4,6 +4,9 @@ namespace App\Form;
 
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,11 +15,21 @@ class AddArticleFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('featuredImage')
-            ->add('content')
-            ->add('published')
-            ->add('keyWords')
+            ->add('title', TextType::class, [
+                'label' => 'Titre'
+            ])
+            ->add('content', TextareaType::class, [
+                'label' =>'Contenu'
+            ])
+            ->add('featuredImage', TextType::class, [
+                'label' => 'Image mise en avant'
+            ])
+            ->add('published', CheckboxType::class, [
+                'label' => 'Publié'
+            ])
+            ->add('keyWords', TextType::class, [
+                'label' => 'Mots clés'
+            ])
         ;
     }
 

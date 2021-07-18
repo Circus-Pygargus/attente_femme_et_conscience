@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Admin\AdminController;
+use App\Entity\Article;
+use App\Form\AddArticleFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,10 +58,15 @@ class ArticleController extends AdminController
         ];
         $this->contentNavigation['inUseRegex'] = 'admin_articles';
 
+        $article = new Article();
+
+        $form = $this->createForm(AddArticleFormType::class, $article);
+
         return $this->render('admin/article/create.html.twig', [
             'heroImgName' => $this->heroImgName,
             'navigationInfos' => $this->navigationInfos,
-            'contentNavigation' => $this->contentNavigation
+            'contentNavigation' => $this->contentNavigation,
+            'articleForm' => $form->createView()
         ]);
     }
 }
