@@ -82,6 +82,11 @@ class Article
      */
     private $keyWords;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $keyWordsString;
+
     public function __construct()
     {
         $this->keyWords = new ArrayCollection();
@@ -203,5 +208,17 @@ class Article
         $this->keyWords->removeElement($keyWord);
 
         return $this;
+    }
+
+    public function setKeyWordsString (string $keyWordString): self
+    {
+        $this->keyWordsString = $keyWordString;
+
+        return $this;
+    }
+
+    public function getKeyWordsString (): ?string
+    {
+        return $this->keyWordsString;
     }
 }
