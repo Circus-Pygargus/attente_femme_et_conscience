@@ -1,0 +1,21 @@
+<div class="navigation-infos">
+    {% for navigationInfo in navigationInfos %}
+        {% if navigationInfo.slug is defined %}
+            <a href="{{ path(navigationInfo.urlPath, {slug: navigationInfo.slug}) }}"
+                class="disabled"
+            >
+                {{ navigationInfo.text }}
+            </a>
+        {% else %}
+            <a href="{{ path(navigationInfo.urlPath) }}"
+                {% if loop.last %} class="disabled"{% endif %}
+            >{{ navigationInfo.text }}</a>
+        {% endif %}
+        {% if not loop.last %}
+            <span>/</span>
+        {% endif %}
+    {% endfor %}
+    <div class="separator"></div>
+</div>
+
+

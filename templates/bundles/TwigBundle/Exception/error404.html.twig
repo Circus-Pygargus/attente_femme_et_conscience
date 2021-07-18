@@ -1,0 +1,25 @@
+{% include 'base.html.twig' %}
+
+{#{% block title %}Femme et conscience{% endblock %}#}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/error-page') }}
+{%  endblock %}
+
+{% block body %}
+    {% include '_layouts/header.html.twig' %}
+
+    <div class="error-container">
+    <div class="error-div">
+        <div class="error-div_space-modulator"></div>
+
+        <h1 class="error-div-title">Oups</h1>
+        <p class="error-div-message">La page demandée n'a pas été trouvée ...</p>
+        <a class="error-div-report" href="#">Signalez-le nous ?</a>
+
+        <div class="error-div_space-modulator"></div>
+    </div>
+    </div>
+
+    {% include '_layouts/footer.html.twig' %}
+{%  endblock %}

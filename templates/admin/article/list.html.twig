@@ -1,0 +1,34 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block adminContent %}
+    <h2 class="title">Gérer les articles</h2>
+
+    <div><a href="#" class="btn btn-inverted">Créer</a></div>
+
+    {% if articles|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="modify">Modifier</th>
+                <th>Publié</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
+            <tr class="article">
+                <td class="article-title">{{ article.title }}</td>
+                <td>
+                    <div class="article-published" data-published="{% if article.published %}1{% else %}0{% endif %}"></div>
+                </td>
+                <td class="article-delete">
+                    <a href="#">X</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="empty-array">Il n'y a aucun article enregistré.</p>
+    {% endif %}
+{% endblock %}

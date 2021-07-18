@@ -1,0 +1,179 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Femme et conscience{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/home') }}
+{%  endblock %}
+
+
+{% block body %}
+    {% include "_layouts/header.html.twig" %}
+
+
+    <div class="hero"></div>
+
+
+    <section class="section u-margin-bottom-medium">
+        <div class="main-content">
+            <div class="sub-big u-margin-bottom-medium">
+                <h2 class="title">BienVenue</h2>
+                <p>À toutes les Femmes, à nos mères, à nos filles …<br>À nos grand-mères… À celles qui n’ont pas enfanté et qui ne sont pas moins Femme, car elles portent en elles, cette essence, qui fait que par nature, elles ont cette capacité de donner cet Amour Universel.</p>
+                <p>Aux hommes qui cherchent à comprendre la nature féminine et à se connecter à la partie féminine en eux. Actuellement beaucoup d’entre eux s’ouvrent de plus en plus à leur côté féminin, bon nombre d’entre eux ne se retrouvent pas dans les schémas qui leur ont été imposés et ils éprouvent le besoin de s’en libérer.</p>
+                <div class="last-line">
+                    <p>Qu’est ce que le Féminin Sacré ?</p>
+                    <a class="btn btn-dark">En savoir +</a>
+                </div>
+            </div>
+            <div class="sub-medium u-margin-bottom-medium">
+                <div class="whoami">
+                    <h2 class="title">Qui suis-je ?</h2>
+                    <p>Psychologue Clinicienne et Nathuropathe depuis 20 ans, j’exerce sur l’ile de La Réunion l’hypnotherapie, l’EFT, je pratique et transmets une méthode de guérison du corps et de l'esprit par le Reiki USUI.</p>
+                    <div class="separator"></div>
+                    <p>Créative, j’aime dessiner et peindre, j’aime l’Art, les Energies, les plantes, les pierres et les mystères de la nature humaine me fascinent encore plus particulièrement.</p>
+                    <a class="btn btn-ultra-light">En savoir +</a>
+                </div>
+            </div>
+        </div>
+        <div class="last-article u-margin-bottom-medium">
+            <div class="last-article--box">
+                <img src="{{ asset( 'build/img/' ~ lastArticle.image ) }}" class="last-article--img">
+                <div class="last-article--sub-title">Dernier article</div>
+                <div class="last-article--separator"></div>
+                <div class="last-article--title">{{ lastArticle.title }}</div>
+                <p class="last-article--excerpt">{{ lastArticle.excerpt }}</p>
+                <a class="btn btn-dark">Lire la suite !</a>
+            </div>
+        </div>
+        <div class="follow">
+            <div class="follow-sub follow-1">
+                <div class="title">
+                    <div class="line-1">Suivez?</div>
+                    <div class="line-2">nous</div>
+                </div>
+                <p class="text u-margin-bottom-small">Suivez nos activités, recevez vos invitations et mon e-book<span> « Se découvirir soi-même pour aborder notre sensualité sereinement »</span> en vous abonnant gratuitement à ma lettre d'information.</p>
+                <a class="btn btn-dark">Créer un compte</a>
+            </div>
+            <div class="follow-separator"></div>
+            <div class="follow-sub follow-2">
+                <div class="title">
+                    <div class="half-logo"></div>
+                    <div class="title-text">« Se découvirir soi-même pour aborder notre sensualité sereinement »</div>
+                </div>
+                <p class="text">« Parce qu’aborder la connaissance de notre corps en tant que femme n’est pas une chose facile, parce que nous souhaitons avoir de bonnes informations et être accompagnée dans notre féminité »</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section u-margin-bottom-medium">
+        <div class="rendez-vous-list">
+            <div class="sub-huge">
+                <div class="rendez-vous-list-title u-padding-bottom-small">
+                    <h2 class="title-text">Les prochains rendez-vous</h2>
+                    <a href="/" class="btn btn-light">En savoir +</a>
+                </div>
+                {% for rv in rendezVous %}
+                    <div class="rendez-vous--ads">
+                        <img src="{{ asset( 'build/img/' ~ rv.img ) }}" alt="{{ rv.imgAlt }}" class="rendez-vous--ads-img">
+                        <div class="rendez-vous--ads-content">
+                            <p class="rendez-vous--ads-date">{{ rv.date }}</p>
+                            <h3 class="rendez-vous--ads-title">{{ rv.title }}</h3>
+                            <p class="rendez-vous--ads-text">{{ rv.text }}</p>
+                            <div><a href="/" class="btn btn-light">En savoir +</a></div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="rendez-vous--none">Pas de rendez-vous programmé pour l'instant</div>
+                {%  endfor %}
+            </div>
+            <div class="sub-small">
+                <div class="encart">
+                    <div class="encart--title encart--title-dark">L'Alimentation</div>
+                    <div class="encart--sub-title">Crue et vivante</div>
+                    <p class="encart--text">Manger du vivant pour être en
+                        bonne santé et découvrir mes
+                        recettes ...</p>
+                    <a href="/" class="btn btn-inverted">Miam</a>
+                </div>
+                <div class="recent-articles">
+                    <div class="title">Articles récents</div>
+                    <div class="separator"></div>
+                    {% for article in recentArticles %}
+                        <a href="/{# lien vers la page de l'article {{ article.id }} #}" class="article">{{ article.title }}</a>
+                        {% if not loop.last %}
+                        <div class="separator"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="encart">
+                    <div class="encart--title">Partenariat</div>
+                    <div class="encart--sub-title">SYNERGIE ÉNERGÉTIQUE GUNDHRA</div>
+                    <p class="encart--text">Technique de Bien-Être utilisant
+                        une fréquence particulière...</p>
+                    <a href="/" class="btn btn-inverted">EN SAVOIR +</a>
+                </div>
+                <div class="site-info">
+                    <div class="site-info--img"></div>
+                    <div class="site-info--text">Ce site web a été conçu de façon à protéger vos données peronnelles.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section u-margin-bottom-medium">
+        <div class="section--heading">
+            <h2 class="section--heading-title">Accompagnements en présentiel</h2>
+            <div class="section--heading-ribbon"></div>
+        </div>
+        <div class="accompaniment-list">
+            {% for accompaniment in accompaniments %}
+{#            <div class="accompaniment {% if loop.first %} accompaniment--first{% endif %}">#}
+                <a href="{{ path('accompaniments_and_formations_showone', {slug: accompaniment.slug}) }}" class="accompaniment {#{% if loop.first %} accompaniment--first{% endif %}#}">
+{#                    <div class="accompaniment--box">#}
+                        <img src="{{ asset('build/img/' ~ accompaniment.img ) }}" alt="{{ accompaniment.imgAlt }}" class="accompaniment--img">
+                        <div class="accompaniment--readable">
+                            <h3 class="accompaniment--readable-title">{{ accompaniment.title }}</h3>
+                            <p class="accompaniment--readable-text">{{ accompaniment.text }}</p>
+                        </div>
+{#                    </div>#}
+                </a>
+{#            </div>#}
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="section u-margin-bottom-medium">
+        <div class="section--heading">
+            <h2 class="section--heading-title">Formations à distance</h2>
+            <div class="section--heading-ribbon"></div>
+        </div>
+        <div class="formations-list">
+            {% for distanceLearning in distanceLearnings %}
+            <div class="product">
+                <h3 class="product--title">{{ distanceLearning.title }}</h3>
+                <p class="product--text">{{ distanceLearning.text }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="section u-margin-bottom-medium">
+        <div class="section--heading">
+            <h2 class="section--heading-title">Produits en ligne</h2>
+            <div class="section--heading-ribbon"></div>
+        </div>
+        <div class="products-list">
+            {% for product in products %}
+                <div class="product">
+                    <h3 class="product--title">{{ product.title }}</h3>
+                    <p class="product--text">{{ product.text }}</p>
+                    <h3 class="product--info">{{ product.info }}</h3>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    {% include "_layouts/footer.html.twig" %}
+
+    <div style="height: 36px;">A effacer, c'est ici juste pour voir le bas de la page !</div>
+{% endblock %}

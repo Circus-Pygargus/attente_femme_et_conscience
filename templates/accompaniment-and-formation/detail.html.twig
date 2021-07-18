@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Femme et conscience{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/accompaniment-and-formation') }}
+{%  endblock %}
+
+
+{% block body %}
+    {% include "_layouts/header.html.twig" %}
+
+    <div class="hero"></div>
+
+    <section class="section">
+        <div class="main-content">
+            <div class="sub-huge">
+                {% include "_layouts/navigation-infos.html.twig" %}
+
+                {% if accompAndFormlist is defined %}
+                    <div>Ici la liste des accompagnements et des formations</div>
+                {%  elseif accompAndFormDetails is defined %}
+                    <div class="accomp-and-form-details">
+                        <span class="category">{{ accompAndFormDetails.category }}</span>
+                        <h2 class="title">{{ accompAndFormDetails.title }}</h2>
+                        <div class="text">{{ accompAndFormDetails.text|nl2br }}</div>
+                        <a href="{{ accompAndFormDetails.reservationLlink }}" class="btn btn-dark">Reserver</a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="sub-small">
+                <h2 class="title">Accompagnements & Formations</h2>
+                {% for element in accompAndFormLinks %}
+                    <a href="#{# {{ path(element.category.link) }}#}" class="sub-title">{{ element.category.name }}</a>
+                    {% for link in element.links %}
+                        <a href="{{ path('accompaniments_and_formations_showone', {slug: link.slug}) }}"
+                            {% if accompAndFormDetails is defined and link.slug == accompAndFormDetails.slug %}
+                                class="selected"
+                            {% endif %}
+                       >
+                            {{ link.title }}
+                        </a>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% include "_layouts/footer.html.twig" %}
+{% endblock %}

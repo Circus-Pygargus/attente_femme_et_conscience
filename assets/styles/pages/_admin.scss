@@ -1,0 +1,140 @@
+.hero {
+  width: 100%;
+  height: calc(100vw * .296);
+  background-image: url("../../img/green-mountains.jpg");
+  background-size: cover;
+}
+
+.section {
+  width: 100%;
+
+  .main-content {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 5%;
+    background-color: $color-white;
+
+    .sub-huge {
+      .title {
+        font-size: 5rem;
+        color:$color-grey;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+      }
+
+      .empty-array {
+        margin-top: 4rem;
+        font-size: 2rem;
+        color: $color-primary-dark;
+      }
+
+      table {
+        margin-top: 4rem;
+        text-transform: uppercase;
+
+        th {
+          color: $color-primary-light;
+
+          &.modify {
+            text-align: left;
+          }
+        }
+
+        td {
+          color: $color-primary-dark;
+          position: relative;
+        }
+
+        th,
+        td {
+          border-bottom: 1px solid $color-grey;
+        }
+
+        .article {
+
+          &-title {
+            font-size: 2rem;
+          }
+
+          &-published {
+            text-align: center;
+
+            &[data-published="0"]::before {
+              content: '';
+              position: absolute;
+              left: calc(50% - 1.5rem);
+              top: 0.2rem;
+              width: 2.4rem;
+              height: 2.2rem;
+              color: $color-primary-dark;
+              background-color: $color-grey;
+              transition: all 1s;
+            }
+
+            &[data-published="1"] {
+              content: '';
+              position: absolute;
+              left: calc(50% - 1.1rem);
+              top: calc(50% - 1.1rem);
+              border-top: 2px solid transparent;
+              border-right: 2px solid $color-green;
+              border-bottom: 2px solid $color-green;
+              border-left: 2px solid transparent;
+              transform: translateX(-7px) translateY(-2px) rotate(40deg);
+              transform-origin: 100% 100%;
+              width: 12px;
+              height: 22px;
+              margin-right: 16px;
+              transition: all 0.5s;
+            }
+          }
+
+          &-delete {
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .sub-small {
+
+      .content-navigation {
+
+        .title {
+          margin-bottom: 2rem;
+          font-size: 3rem;
+          color: $color-grey;
+        }
+
+        a.link {
+          position: relative;
+          display: block;
+          margin-bottom: 2rem;
+          padding-left: 2rem;
+          font-size: 1.6rem;
+          text-transform: uppercase;
+          color: $color-grey;
+          transition: all .5s;
+
+          &:hover {
+            color: $color-white;
+          }
+
+          &.selected {
+            color: $color-white;
+
+            &::after {
+              content: '';
+              position: absolute;
+              left: -4%;
+              bottom: -1rem;
+              width: 108%;
+              border-bottom: 1px solid $color-white;
+            }
+          }
+        }
+      }
+    }
+  }
+}

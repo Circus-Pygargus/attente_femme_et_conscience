@@ -1,0 +1,12 @@
+// Navbar animation
+@keyframes anim_header_on-scroll-up {
+  0% { top: -7rem;}
+  //30% {top: -5rem}
+  100% {top: 0;}
+}
+
+@keyframes anim_header_on-scroll-down {
+  0% {top: 0;}
+  90% {top: -3rem;}
+  100% {top: -7rem;}
+}

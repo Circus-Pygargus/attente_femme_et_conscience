@@ -1,0 +1,80 @@
+.section {
+
+  .main-content {
+
+    .sub-huge {
+
+      // listing some elements
+      .elements {
+
+        .rendez-vous {
+          display: flex;
+          justify-content: space-between;
+          height: 14rem;
+
+          &__img {
+            //width: 100px;
+            //height: 100px;
+            width: 140px;
+            height: 14rem;
+            // background-image is in html as twig variable
+            //background-image: none;
+            background-size: cover;
+          }
+
+          &__texts {
+            display: flex;
+            flex-direction: column;
+            color: $color-primary-light;
+            margin-left: 2rem;
+
+            &-date {
+
+            }
+
+            &-title {
+              margin: .2rem 0 1.4rem;
+            }
+
+            div {
+              margin-top: auto;
+              .btn {
+
+              }
+            }
+          }
+        }
+      }
+
+
+      // displaying only one element
+      .element-details {
+        color: $color-primary-light;
+
+        .category {
+          font-size: 1.1rem;
+          text-transform: uppercase;
+        }
+
+        .title {
+          margin: 1rem 0 3rem;
+          font-size: 2rem;
+          text-transform: uppercase;
+        }
+
+        .content {
+          font-size: 1.6rem;
+          color: $color-primary-dark;
+
+          p {
+            margin-bottom: 2rem;
+          }
+        }
+
+        .btn {
+          margin: 2rem auto 0 0;
+        }
+      }
+    }
+  }
+}

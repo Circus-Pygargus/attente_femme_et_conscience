@@ -1,0 +1,58 @@
+.btn {
+    //position: absolute;
+    //bottom: 1rem;
+    //right: 0;
+    display: inline-block;
+    cursor: pointer;
+    padding: .5rem .8rem;
+    text-transform: uppercase;
+    transition: all 0.5s;
+
+    &-ultra-light {
+        background-color: $color-primary-light;
+        color: $color-primary-ultra-light;
+        border: 1px solid $color-primary-ultra-light;
+
+        &:hover {
+            background-color: $color-primary-ultra-light;
+            color: $color-primary-light;
+        }
+    }
+
+    &-light {
+        color: $color-primary-light;
+        border: 1px solid $color-primary-light;
+
+        &:hover {
+            background-color: $color-primary-light;
+            color: $color-primary-ultra-light;
+            border: 1px solid $color-primary-light;
+        }
+    }
+
+    &-dark {
+        color: $color-primary-dark;
+        border: 1px solid $color-primary-dark;
+
+        &:hover {
+            background-color: $color-primary-light;
+            color: $color-primary-ultra-light;
+            border: 1px solid $color-primary-light;
+        }
+    }
+
+    &-inverted {
+        background-color: $color-primary-light;
+        color: $color-primary-ultra-light;
+        border: 1px solid $color-primary-light;
+
+        &:hover {
+            background-color: $color-primary-ultra-light;
+            color: $color-primary-light;
+        }
+    }
+
+    &:active {
+        transform: scale(1.1, 1.1);
+    }
+}

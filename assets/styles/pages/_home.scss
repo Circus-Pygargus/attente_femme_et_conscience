@@ -1,0 +1,316 @@
+.hero {
+  width: 100%;
+  height: calc(100vw * .57);
+  background-image: url("../../img/valerie.jpg");
+  background-size: cover;
+}
+
+.section {
+  width: 100%;
+
+  .main-content {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 5%;
+    background-color: $color-white;
+    text-align: center;
+
+    .sub-big {
+      position: relative;
+      width: 57%;
+      .title {
+        font-size: 12.8rem;
+        font-size: 11vw;
+        color: $color-primary-light;
+        transform: rotate(-4.2deg);
+      }
+
+      p {
+        padding-bottom: 1.6rem;
+        color: $color-primary-dark;
+      }
+
+      /* le texte est centré comme les p précédents et le btn reste bien à droite */
+      .last-line {
+        display: flex;
+        justify-content: flex-start;
+        position: relative;
+
+        p {
+          flex: 0 1 auto;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .btn {
+          flex: 0 1 auto;
+          margin-left: auto;
+          transform: translateY(-.5rem);
+        }
+      }
+    }
+
+    .sub-medium {
+      position: relative;
+      width: 37%;
+
+      .whoami {
+        position: absolute;
+        top: -6%;
+        width: 100%;
+        height: 106%;
+        padding: 12% 5%;
+        background-color: rgba($color-primary-light, .9);
+
+        .title {
+          color: $color-primary-ultra-light;
+          font-size: 2.4rem;
+        }
+
+        p {
+          margin: 2rem 0;
+          color: $color-primary-ultra-light;
+        }
+
+        .separator {
+          width: 30%;
+          height: 0;
+          border: 1px solid $color-primary-ultra-light;
+          margin: auto;
+        }
+      }
+    }
+  }
+
+  .last-article {
+    width: 100%;
+    background-color: $color-primary-light;
+
+    &--box {
+      position: relative;
+      width: 90%;
+      margin: 0 auto;
+      padding: 2.5rem 0 3rem 25rem;
+    }
+
+    &--img {
+      position: absolute;
+      top: -1rem;
+      left: 0;
+      height: 110%;
+      //margin-right: 2.5rem;
+    }
+
+    &--sub-title {
+      font-size: 1.4rem;
+      text-transform: uppercase;
+      color: $color-primary-ultra-light;
+      margin-bottom: .2rem;
+    }
+
+    &--separator {
+      width: 100%;
+      height: 0;
+      border-bottom: 1px solid $color-primary-ultra-light;
+    }
+
+    &--title {
+      font-size: 2.4rem;
+      color: $color-white;
+      margin: .5rem 0 2rem;
+    }
+
+    &--excerpt {
+      font-size: 1.8rem;
+      color: $color-primary-ultra-light;
+    }
+
+    .btn {
+      position: absolute;
+      bottom: -1.5rem;
+      right: 0;
+      background-color: white;
+    }
+
+  }
+
+  .follow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+    padding: 5rem;
+    background-color: $color-primary-ultra-light;
+    border: 1px solid $color-primary-dark;
+    text-align: center;
+
+    &-sub {
+      width: calc(100% - (5rem * 2) - (5rem * 2 + 1px));
+    }
+    &-1 {
+      .title {
+        font-size: 8rem;
+        color: $color-primary-light;
+
+        .line-2 {
+          margin-top: -5rem;
+        }
+      }
+
+      .text {
+        color: $color-primary-dark;
+
+        span {
+          padding: 0 .5rem;
+          color: $color-primary-light;
+        }
+      }
+
+      .btn {
+        margin: 2rem auto 0;
+      }
+    }
+
+    &-separator {
+      width: 0;
+      height: 30rem;
+      margin: auto 5rem;
+      border-left: 1px solid $color-primary-dark;
+    }
+
+    &-2 {
+      .title {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .half-logo {
+          width: 17rem;
+          height: calc((101 * 17rem) / 114);
+          background-image: url('../../img/lotus-flower-half.svg');
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
+
+        &-text {
+          font-size: 2rem;
+          color: $color-primary-light;
+          margin-left: -3rem;
+        }
+      }
+
+      .text {
+        color: $color-primary-dark;
+      }
+    }
+  }
+
+  .rendez-vous-list {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5rem;
+
+    .sub-huge {
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+
+
+      .rendez-vous-list-title {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: $margin-bottom-medium;
+        padding-bottom: $padding-extra-small;
+        border-bottom: 1px solid $color-primary-light;
+
+        .title-text {
+          color: $color-primary-light;
+        }
+      }
+    }
+    .sub-small {
+      width: calc(35% - 5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .recent-articles {
+
+        .title {
+          font-size: 2.8rem;
+          color: $color-grey;
+        }
+
+        .separator {
+          width: 100%;
+          margin: .5rem 0 1rem;
+          border-bottom: 1px solid $color-grey;
+        }
+
+        .article {
+          color: $color-primary-light;
+
+          &:hover {
+            color: $color-primary-dark;
+          }
+        }
+      }
+    }
+  }
+
+  &--heading {
+
+    &-title {
+      font-size: 3.2rem;
+      text-transform: uppercase;
+      text-align: center;
+      background-color: $color-primary-light;
+      color: $color-primary-ultra-light;
+      padding: 1rem 0;
+    }
+
+    &-ribbon {
+      height: calc(4rem + 1.8rem + 7.5rem);
+      background-color: $color-primary-ultra-light;
+      z-index: -1;
+    }
+  }
+
+  .accompaniment-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: -8.8rem;
+    padding: 0 5rem;
+
+    .accompaniment {
+      width: 49%;
+
+      &:first-child {
+        width: 100%;
+      }
+    }
+  }
+
+  .formations-list,
+  .products-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 5rem;
+
+    .product {
+      width: 49%;
+    }
+  }
+  .formations-list {
+    margin-top: -5.7rem;
+  }
+  .products-list {
+    margin-top: -8.8rem;
+  }
+}

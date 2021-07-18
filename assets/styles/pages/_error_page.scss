@@ -1,0 +1,38 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .error-container {
+    flex-grow: 1;
+  }
+
+  .error-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-transform: uppercase;
+    background-color: $color-primary-ultra-light;
+
+    &-title {
+      font-size: 5rem;
+      color: $color-primary-light;
+    }
+
+    &-message {
+      font-size: 2rem;
+      color: $color-primary-light;
+    }
+
+    &-report {
+      font-size: 2rem;
+      color: $color-primary-dark;
+    }
+
+    &_space-modulator {
+      flex-grow: 1;
+    }
+  }
+}

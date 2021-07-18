@@ -1,0 +1,57 @@
+<div class="content-navigation">
+    <h2 class="title">{{ contentNavigation.title }}</h2>
+
+    {% if contentNavigation.categories is defined %}
+        {%  for category in contentNavigation.categories %}
+            <div class="category">
+                <a href="{{ path(category.link) }}"
+                    class="link category-link
+                    {% if content.page is defined and content.page == category.name %}
+                        selected
+                    {% endif %}
+                    "
+                >
+                    {{ category.name }}
+                </a>
+                {% if category.links is defined %}
+                {% for element in category.links %}
+                    <a href="{{ path(category.link, {slug: element.slug}) }}"
+                        class="link
+                        {% if content.slug is defined and element.slug == content.slug %}
+                             selected
+                        {% endif %}
+                        "
+                    >
+                        {{ element.title }}
+                    </a>
+                {% endfor %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% elseif contentNavigation.adminLinks is defined %}
+        {% for link in contentNavigation.adminLinks %}
+            <a href="{{ path(link.urlPath) }}"
+                class="link
+                {% if navigationInfos|last.urlPath == link.urlPath %}
+                    selected
+                {% endif %}
+                "
+           >
+                {{ link.label }}
+            </a>
+        {% endfor %}
+    {% else %}
+        {% set subLink = contentNavigation.subLink %}
+        {% for element in contentNavigation.links %}
+            <a href="{{ path(subLink, {slug: element.slug}) }}"
+                class="link
+                {% if content.slug is defined and element.slug == content.slug %}
+                    selected
+                {% endif %}
+                "
+            >
+                {{ element.title }}
+            </a>
+        {% endfor %}
+    {% endif %}
+</div>

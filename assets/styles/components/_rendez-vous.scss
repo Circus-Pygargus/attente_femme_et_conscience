@@ -1,0 +1,44 @@
+.rendez-vous {
+
+  &--ads {
+    padding-bottom: .5rem;
+
+    &:not(:last-child) {
+      margin-bottom: $margin-bottom-medium;
+    }
+
+    &-img {
+      float: left;
+      height: 100%;
+      margin-right: 2.5rem;
+    }
+
+    &-content {
+      color: $color-primary-light;
+    }
+
+    &-date {
+      font-size: 1.4rem;
+    }
+
+    &-title {
+      text-transform: uppercase;
+      font-size: 2.4rem;
+      margin: .9rem 0 2rem;
+    }
+
+    &-text {
+      margin-bottom: 1.5rem;
+      @media screen and (max-width: 1195px) {
+        margin-bottom: 3.5rem;
+      }
+    }
+
+    .btn {
+      @media screen and (max-width: 1195px) {
+        position: relative;
+        top: -2rem;
+      }
+    }
+  }
+}

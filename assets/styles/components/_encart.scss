@@ -1,0 +1,30 @@
+.encart {
+  position: relative;
+  text-align: center;
+  color: $color-primary-light;
+  padding: 2rem 2rem 3rem;
+  border: 1px solid $color-primary-light;
+
+  &--title {
+    font-size: 3rem;
+  }
+
+  &--title-dark {
+    color: $color-primary-dark;
+  }
+
+  &--sub-title {
+    font-size: 2rem;
+    margin-bottom: $margin-bottom-small;
+  }
+
+  &--text {
+    font-size: 1.4rem;
+  }
+
+  .btn {
+    position: absolute;
+    bottom: 0;
+    transform: translate(-50%, 50%);
+  }
+}

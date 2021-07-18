@@ -1,0 +1,35 @@
+.footer {
+  margin-top: 9rem;
+
+  &--top {
+    height: 4rem;
+    background-color: $color-primary-ultra-light;
+  }
+
+  &--bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2rem;
+    padding: 0 1rem;
+    background-color: $color-primary-light;
+    text-transform: uppercase;
+    color: $color-primary-ultra-light;
+
+
+    a:visited {
+      cursor: pointer;
+      transition: all .5s;
+      color: $color-primary-ultra-light;
+    }
+    a:hover {
+      color: $color-primary-dark;
+    }
+
+    .copyright {
+      font-size: 1.2rem;
+      text-transform: initial;
+      color: $color-primary-ultra-light;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.site-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 4rem;
+
+  &--img {
+    width: 4rem;
+    height: 100%;
+    background-image: url('../../img/logo-secu.svg');
+    background-size: cover;
+    z-index: 1;
+  }
+
+  &--text {
+    font-size: 1.2rem;
+    color: $color-primary-light;
+    margin-left: 2rem;
+  }
+}

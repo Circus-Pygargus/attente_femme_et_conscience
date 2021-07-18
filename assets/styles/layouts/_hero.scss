@@ -1,0 +1,6 @@
+.hero {
+  width: 100%;
+  height: calc(100vw * .296);
+  // background-image is in html as twig variable
+  background-size: cover;
+}

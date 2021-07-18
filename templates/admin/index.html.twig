@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{#{% block title %}Femme et conscience{% endblock %}#}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/admin') }}
+{%  endblock %}
+
+{% block body %}
+    {% include '_layouts/header.html.twig' %}
+
+    <div class="hero" style="background-image: url({{ asset('build/img/' ~ heroImgName) }}"></div>
+
+    <section class="section">
+        <div class="main-content">
+            <div class="sub-huge">
+                {% include '_layouts/navigation-infos.html.twig' %}
+                {% block adminContent %}
+                    <h2>Bienvenue dans l'interface d'administration du site</h2>
+                {% endblock %}
+            </div>
+            <div class="sub-small">
+                {% include '_layouts/content-navigation.html.twig' %}
+            </div>
+        </div>
+    </section>
+
+    {% include '_layouts/footer.html.twig' %}
+{%  endblock %}
+

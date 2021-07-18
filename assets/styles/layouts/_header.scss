@@ -1,0 +1,141 @@
+.header {
+
+  &--top {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3rem;
+    padding: 0 1.5rem;
+    background-color: $color-primary-light;
+    text-transform: uppercase;
+    color: $color-primary-ultra-light;
+
+    div span,
+    a,
+    a:visited {
+      cursor: pointer;
+      transition: all .5s;
+      color: $color-primary-ultra-light;
+    }
+
+    div span:hover,
+    a:hover {
+      color: $color-primary-dark;
+    }
+  }
+
+  &--middle {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 12rem;
+    background-color: $color-primary-ultra-light;
+    background-image: url('../../img/header-bg-lotus.svg');
+    background-size: cover;
+
+    .header--logo {
+      width: 9rem;
+      height: 7rem;
+    }
+
+    h1 {
+
+      font-size: 3.5rem;
+      color: $color-primary-light;
+      text-align: center;
+
+      span {
+        display: block;
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  &--navbar {
+    position: relative;
+
+    .navbar {
+      height: 4rem;
+
+      &--list {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 100%;
+
+        &-element {
+
+          a,
+          a.visited {
+            text-transform: uppercase;
+            color: $color-primary-light;
+            transition: all .5s;
+
+            &.selected,
+            &:hover {
+              color: $color-primary-dark;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// DOM built in js
+#header {
+  position: absolute;
+  top: 0;
+  //top: -19rem;
+  width: 100%;
+  z-index: 1;
+}
+
+#header.header_default-place {
+  //position: relative;
+  //position: absolute;
+  //top: -19rem;
+  display: none;
+}
+
+#header.header_on-scroll-up {
+  position: fixed;
+  //top: 0;
+  animation: anim_header_on-scroll-up .8s ease-out 1 normal forwards;
+}
+
+#header.header_on-scroll-down {
+  position: fixed;
+  //top: -19rem;
+  animation: anim_header_on-scroll-down .8s ease-in 0s 1 normal forwards;
+}
+
+
+#header.header_on-scroll-up > .header--middle,
+#header.header_on-scroll-down > .header--middle {
+  display: none;
+}
+
+#header.header_on-scroll-up > .header--navbar,
+#header.header_on-scroll-down > .header--navbar {
+  background-color: $color-grey;
+
+  .navbar {
+
+    &--list {
+
+      &-element {
+
+        a,
+        a.visited {
+          color: $color-primary-light;
+
+          &.selected,
+          &:hover {
+            color: $color-primary-dark;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<nav class="navbar">
+    <ul class="navbar--list">
+        <li class="navbar--list-element">
+            <a href="/"
+               class="{% if navbarInfos is defined and navbarInfos.page is same as 'home' %}selected{% endif %}"
+            >
+                Accueil
+            </a>
+        </li>
+        <li class="navbar--list-element"><a href="#">Qui-suis-je ?</a></li>
+        <li class="navbar--list-element">
+            <a href="{{ path('rendez_vous') }}"
+                class="{% if navbarInfos is defined and navbarInfos.page is same as 'accompaniment-and-formation' %}selected{% endif %}"
+            >
+                Accompagnement & Formations
+            </a>
+        </li>
+        <li class="navbar--list-element">
+            <a href="{{ path('articles_list') }}"
+               class="{% if navbarInfos is defined and navbarInfos.page is same as 'articles' %}selected{% endif %}"
+            >
+                Articles
+            </a>
+        </li>
+        <li class="navbar--list-element">
+            <a href="{{ path('raw_and_living_food') }}"
+               class="{%  if navbarInfos is defined and navbarInfos.page is same as 'raw-and-living-food' %}selected{% endif %}"
+            >
+                Alimentation
+            </a>
+        </li>
+        <li class="navbar--list-element"><a href="#">Contact</a></li>
+    </ul>
+</nav>

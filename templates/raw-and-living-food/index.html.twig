@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Femme et conscience{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/raw-and-living-food') }}
+{%  endblock %}
+
+
+{% block body %}
+    {% include '_layouts/header.html.twig' %}
+
+
+    <div class="hero"></div>
+
+
+    <section class="section">
+        <div class="main-content">
+            <div class="sub-huge">
+                {% include "_layouts/navigation-infos.html.twig" %}
+
+                <h2 class="title">Alimentation<span class="sub-title">crue et vivante</span></h2>
+
+                <p>
+                    Le principal : Comment mon organisme, en l’occurrence mes cellules
+                    pouvaient–elles réellement bénéficier de tous les bienfaits que j’étais
+                    sensée leur apporter si elles-mêmes ne pouvaient pas assimiler ce que je
+                    leur donnais ?
+                </p>
+                <p
+                >Une solution : Désengorger ces cellules de toutes les toxines accumulées
+                    depuis tant d’années et qui empêchaient l’absorption des nutriments
+                    dont j’avais besoin. En même temps, je découvrais les lavements et les
+                    bains dérivatifs afin de « détoxiner » le corps, ce qui à mon sens me
+                    semble indispensable pour mieux assimiler tous les nutriments dont
+                    nous avons besoin.
+                </p>
+                <p>
+                    Le pas décisif a été franchi lorqu’avec mon compagnon nous avons
+                    découvert une <a href="#">vidéo d’Irène GROSJEAN</a>, naturopathe, démontrant qu’il
+                    est tout à fait possible de manger complètement cru et de se maintenir
+                    ainsi en santé.
+                </p>
+                <p>
+                    Si certaines recettes peuvent paraitre un peu éloborées, l'essentiel de
+                    l'alimentation crue et vivante est principalement les légumes et les
+                    fruits, les graines germées, les noix et les graines en petites quantité, les
+                    algues et l'herbe de blé en très petites quantité et enfin les huiles et
+                    levure alimentaire.
+                </p>
+                <p class="img-introduction">Ma pyramide qui me sert constamment de référence :</p>
+                <img class="img" src="{{ asset('build/img/food-pyramid.jpg') }}">
+                <p>
+                    Ce qui est proposé ici n'est pas un modèle en soi, ce qui peut convenir à
+                    une personne ne peut convenir à tous. A chacun de trouver son juste
+                    équilibre.
+                </p>
+                <div class="whoami_excerpt">
+                    <img class="whoami_excerpt-img"
+                         src="{{ asset('build/img/valerie-rv.jpg') }}"
+                    >
+                    <div class="whoami_excerpt-text">
+                        « Tu manges quoi, toi ? » Des réponses parmi les infinies
+                        possibilités qu’offre ce mode d’alimentation. Je vous
+                        souhaite de joyeuses découvertes « crulinaires ».
+                    </div>
+                    <a class="btn btn-light" href="#">Qui suis-je ?</a>
+                </div>
+            </div>
+            <div class="sub-small">
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

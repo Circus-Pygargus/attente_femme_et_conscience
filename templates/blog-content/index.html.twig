@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Femme et conscience{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/blog-content') }}
+{%  endblock %}
+
+
+{% block body %}
+    {% include "_layouts/header.html.twig" %}
+
+<div class="hero" style="background-image: url({{ asset('build/img/' ~ heroImgName) }})"></div>
+<section class="section">
+    <div class="main-content">
+        <div class="sub-huge">
+            {% include "_layouts/navigation-infos.html.twig" %}
+
+            {% if content.list is defined %}
+                <div class="elements">
+                {% for element in content.list %}
+                    {% include 'blog-content/_list-components/' ~ content.subLayout with {'element': element} %}
+                {% else %}
+                    {{ content.noContentMsg }}
+                {% endfor %}
+                </div>
+            {% else %}
+                <div class="element-details">
+                    {% if content.category is defined %}
+                        <span class="category">{{ content.category }}</span>
+                    {% endif %}
+                    <h2 class="title">{{ content.title }}</h2>
+                    <div class="content">{{ content.text | raw }}</div>
+                    {% if content.reservationLink is defined %}
+                        <a href="{{ content.reservationLlink }}" class="btn btn-dark">Reserver</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="sub-small">
+            {% include "_layouts/content-navigation.html.twig" %}
+        </div>
+    </div>
+</section>
+
+    {% include "_layouts/footer.html.twig" %}
+{% endblock %}
