@@ -1,0 +1,42 @@
+.sub-big {
+  color: $color-primary-light;
+
+  p {
+    padding-bottom: 2rem;
+
+    &:last-of-type {
+      padding-top: 1.8rem;
+    }
+  }
+
+  .form {
+    input {
+      margin-right: 5rem;
+    }
+
+    .btn {
+      width: 11rem;
+      line-height: 2rem;
+      margin-right: calc(50% - 6rem);
+    }
+  }
+
+}
+
+.sub-medium {
+  height: 100%;
+  text-align: center;
+  color: $color-white;
+
+  .title {
+    position: relative;
+    font-size: 3rem;
+    margin-bottom: 5rem;
+
+    span {
+      position: absolute;
+      top: 60%;
+      left: 5%;
+    }
+  }
+}
