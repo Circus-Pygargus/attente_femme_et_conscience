@@ -2,7 +2,13 @@
 
 {% block title %}Log in!{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/login') }}
+{%  endblock %}
+
 {% block body %}
+    {% include '_layouts/header.html.twig' %}
+
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -39,4 +45,6 @@
         Sign in
     </button>
 </form>
+
+    {% include '_layouts/footer.html.twig' %}
 {% endblock %}
