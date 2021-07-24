@@ -9,7 +9,10 @@
 
 @import "components/button";
 
+@import "layouts/columns";
 @import 'layouts/footer';
 @import "layouts/header";
+@import "layouts/hero";
+@import "layouts/navigation-infos";
 
 @import 'pages/login';

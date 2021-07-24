@@ -14,6 +14,18 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        $heroImgName = 'green-mountains.jpg';
+        $navigationInfos = [
+            [
+                'text' => 'Accueil',
+                'urlPath' => 'home'
+            ],
+            [
+                'text' => 'Connexion à votre compte utilisateur',
+                'urlPath' => 'admin'
+            ]
+        ];
+
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
@@ -23,7 +35,12 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig', [
+            'heroImgName' =>$heroImgName,
+            'navigationInfos' => $navigationInfos,
+            'last_username' => $lastUsername,
+            'error' => $error
+        ]);
     }
 
     /**
