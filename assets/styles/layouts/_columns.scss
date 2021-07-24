@@ -20,5 +20,16 @@
       background-color: rgba($color-primary-light, .9);
       transform: translateY(-6%);
     }
+
+    .sub-big {
+      width: 57%;
+    }
+
+    .sub-medium {
+      width: calc(43% - 5rem);
+      padding: 4rem 5%;
+      background-color: rgba($color-primary-light, .9);
+      transform: translateY(-2rem);
+    }
   }
 }
