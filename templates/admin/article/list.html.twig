@@ -17,7 +17,13 @@
         <tbody>
         {% for article in articles %}
             <tr class="article">
-                <td class="article-title">{{ article.title }}</td>
+                <td class="article-title">
+                    <a href="{{ path('admin_articles_edit', {
+                        slug: article.slug
+                    }) }}">
+                        {{ article.title }}
+                    </a>
+                </td>
                 <td>
                     <div class="article-published" data-published="{% if article.published %}1{% else %}0{% endif %}"></div>
                 </td>

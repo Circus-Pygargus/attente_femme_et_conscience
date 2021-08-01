@@ -8,7 +8,8 @@
 @import "base/utilities";
 
 @import "components/button";
-@import "components/paginator";
+@import "vendors/paginator";
+@import "vendors/vich-image";
 
 @import "layouts/columns";
 @import 'layouts/footer';

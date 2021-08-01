@@ -6,6 +6,11 @@
     {{ encore_entry_link_tags('css/admin') }}
 {%  endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('app-admin') }}
+{% endblock %}
+
 {% block body %}
     {% include '_layouts/header.html.twig' %}
 

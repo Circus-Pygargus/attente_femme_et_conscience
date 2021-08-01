@@ -89,6 +89,45 @@ class ArticleController extends AdminController
         ]);
     }
 
+    /**
+     * @Route("/edit/{slug}", name="edit")
+     */
+    public function edit (string $slug = '', Request $request, ArticleRepository $articleRepository): Response
+    {
+        $this->navigationInfos[] = [
+            'text' => 'Gérer les articles',
+            'urlPath' => 'admin_articles_list'
+        ];
+        $this->navigationInfos[] = [
+            'text' => 'Éditer un article',
+            'urlPath' => 'admin_articles_edit'
+        ];
+        $this->contentNavigation['inUseRegex'] = 'admin_articles';
+
+        if ($slug !== '') {
+            $article = $articleRepository->findOneBy(['slug' => $slug]);
+        } else {
+            $article = new Article();
+        }
+
+        $form = $this->createForm(AddArticleFormType::class, $article);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $doctrine = $this->getDoctrine()->getManager();
+            $doctrine->persist($article);
+            $doctrine->flush();
+            return $this->redirectToRoute('admin_articles_list');
+        }
+
+        return $this->render('admin/article/edit.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'articleForm' => $form->createView()
+        ]);
+    }
 
 
     /**
