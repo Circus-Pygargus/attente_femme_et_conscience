@@ -2,20 +2,52 @@
 
 {% block title %}Register{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/login') }}
+{#    TODO virer celui-ci si mise en place des utilisateurs !!! #}
+{#    {{ encore_entry_link_tags('css/error-page') }}#}
+{%  endblock %}
+
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+{#    TODO remettre si besoin d'utilisateurs !!! #}
+    {% include '_layouts/header.html.twig' %}
 
-    <h1>Register</h1>
+    <div class="hero" style="background-image: url({{ asset('build/img/' ~ heroImgName) }}"></div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    <section class="section">
+        <div class="main-content">
+            <div class="sub-big">
+                {% include '_layouts/navigation-infos.html.twig' %}
+
+                <h2>Créer un compte utilisateur</h2>
+
+                {% for flashError in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                {% endfor %}
+
+                {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword, {
+                    label: 'Password'
+                }) }}
+                {{ form_row(registrationForm.agreeTerms) }}
+
+                <button type="submit" class="btn">Register</button>
+                {{ form_end(registrationForm) }}
+
+
+
+                {#    {% include '_layouts/error-special-page.html.twig' with {#}
+                {#        'specialErrorMessage': 'Cette fonctionnalité n\'existe pas pour le moment.'#}
+                {#        }#}
+                {#    %}#}
+            </div>
+            <div class="sub-medium">
+                <h3 class="title">S'abonner <span>à ma lettre mensuelle</span></h3>
+                <p class="text">Restez informés, une fois par mois, de mon activité et des prochains rendez-vous à reserver.</p>
+                {#                TODO Créer et ajouter le composant d'inscription à la newsletter, ne pas oublier de mettre un if app.user (voir ci-dessus) pour donner la possiblité de se désinscrire #}
+            </div>
+        </div>
+    </section>
 {% endblock %}

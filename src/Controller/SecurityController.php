@@ -22,7 +22,7 @@ class SecurityController extends AbstractController
             ],
             [
                 'text' => 'Connexion à votre compte utilisateur',
-                'urlPath' => 'admin'
+                'urlPath' => 'app_login'
             ]
         ];
 

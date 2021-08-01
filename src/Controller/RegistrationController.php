@@ -71,7 +71,21 @@ class RegistrationController extends AbstractController
             );
         }
 
+        $heroImgName = 'green-mountains.jpg';
+        $navigationInfos = [
+            [
+                'text' => 'Accueil',
+                'urlPath' => 'home'
+            ],
+            [
+                'text' => 'Création de votre compte utilisateur',
+                'urlPath' => 'app_register'
+            ]
+        ];
+
         return $this->render('registration/register.html.twig', [
+            'heroImgName' => $heroImgName,
+            'navigationInfos' => $navigationInfos,
             'registrationForm' => $form->createView(),
         ]);
     }
