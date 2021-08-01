@@ -47,4 +47,15 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getArticlesAdminList (): array
+    {
+        $dql = $this->createQueryBuilder('a')
+            ->select('a.slug, a.title, a.published')
+            ->orderBy('a.createdAt', 'DESC');
+
+        $query = $dql->getQuery();
+
+        return $query->execute();
+    }
 }

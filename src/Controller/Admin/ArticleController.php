@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AdminController;
 use App\Entity\Article;
 use App\Form\AddArticleFormType;
+use App\Repository\ArticleRepository;
 use App\Repository\KeyWordRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,22 +22,14 @@ class ArticleController extends AdminController
     /**
      * @Route("/", name="list")
      */
-    public function list ()
+    public function list (ArticleRepository $articleRepository): Response
     {
         $this->navigationInfos[] = [
             'text' => 'Gérer les articles',
             'urlPath' => 'admin_articles_list'
         ];
-        $articles = [
-            [
-                'title' => 'Reprenons notre pouvoir',
-                'published' => true
-            ],
-            [
-                'title' => 'Article 2',
-                'published' => false
-            ]
-        ];
+        $articles = $articleRepository->getArticlesAdminList();
+
         return $this->render('admin/article/list.html.twig', [
             'heroImgName' => $this->heroImgName,
             'navigationInfos' => $this->navigationInfos,
