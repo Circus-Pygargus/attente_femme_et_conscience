@@ -8,6 +8,7 @@ use App\Form\AddArticleFormType;
 use App\Repository\ArticleRepository;
 use App\Repository\KeyWordRepository;
 use Doctrine\Common\Collections\Collection;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,13 +23,23 @@ class ArticleController extends AdminController
     /**
      * @Route("/", name="list")
      */
-    public function list (ArticleRepository $articleRepository): Response
+    public function list (
+        Request $request,
+        ArticleRepository $articleRepository,
+        PaginatorInterface $paginator
+    ): Response
     {
         $this->navigationInfos[] = [
             'text' => 'Gérer les articles',
             'urlPath' => 'admin_articles_list'
         ];
-        $articles = $articleRepository->getArticlesAdminList();
+        $données = $articleRepository->getArticlesAdminList();
+
+        $articles = $paginator->paginate(
+            $données, // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page demandée via url, 1 si aucune page
+            25 // le nombre d'articles par page
+        );
 
         return $this->render('admin/article/list.html.twig', [
             'heroImgName' => $this->heroImgName,
