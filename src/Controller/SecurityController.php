@@ -26,9 +26,11 @@ class SecurityController extends AbstractController
             ]
         ];
 
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        // If already connected, redirect as it must be an admin for the moment
+//        TODO Modifier lors de l'utilisation des users
+         if ($this->getUser()) {
+             return $this->redirectToRoute('admin');
+         }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
