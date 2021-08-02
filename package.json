@@ -15,7 +15,7 @@
         "dev-server": "encore dev-server",
         "dev": "./node_modules/@symfony/webpack-encore/bin/encore.js dev",
         "watch": "./node_modules/@symfony/webpack-encore/bin/encore.js dev --watch",
-        "build": "encore production --progress"
+        "build": "./node_modules/@symfony/webpack-encore/bin/encore.js production --progress"
     },
     "dependencies": {
         "copy-webpack-plugin": "^9.0.0"
