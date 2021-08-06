@@ -52,9 +52,9 @@ class ArticleController extends AdminController
             $doctrine->flush();
 
             if ($article->getPublished()) {
-                $message = 'L\'article ' . $article->getTitle() . ' est maintenant publié.';
+                $message = 'L\'article <b>' . $article->getTitle() . '</b> est maintenant publié.';
             } else {
-                $message = 'L\'article ' . $article->getTitle() . ' n\'est plus publié.';
+                $message = 'L\'article <b>' . $article->getTitle() . '</b> n\'est plus publié.';
             }
         }
 
