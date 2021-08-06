@@ -1,9 +1,25 @@
 {% extends 'admin/index.html.twig' %}
 
+{% block javascripts %}
+{#    {{ parent() }}#}
+    {{ encore_entry_script_tags('app_admin_article') }}
+{% endblock %}
+
 {% block adminContent %}
     <h2 class="title">Gérer les articles</h2>
 
     <div><a href="{{ path('admin_articles_create') }}" class="btn btn-inverted">Créer</a></div>
+
+    <div style="display:none">
+        {{ form_start(articlePublishForm) }}
+            {{ form_widget(articlePublishForm.slug) }}
+            {{ form_widget(articlePublishForm.published) }}
+        {{ form_end(articlePublishForm) }}
+    </div>
+
+    {% if lastArticleMessage is defined %}
+        <p>{{ lastArticleMessage }}</p>
+    {% endif %}
 
     {% if articles|length > 0 %}
     <table class="table">
@@ -25,7 +41,11 @@
                     </a>
                 </td>
                 <td>
-                    <div class="article-published" data-published="{% if article.published %}1{% else %}0{% endif %}"></div>
+                    <div
+                        class="article-published"
+                        data-published="{% if article.published %}1{% else %}0{% endif %}"
+                        data-slug="{{ article.slug }}"
+                    ></div>
                 </td>
                 <td class="article-delete">
                     <a href="#">X</a>

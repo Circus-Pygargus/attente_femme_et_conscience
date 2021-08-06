@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AdminController;
 use App\Entity\Article;
 use App\Form\AddArticleFormType;
+use App\Form\PublishArticleFormType;
 use App\Repository\ArticleRepository;
 use App\Repository\KeyWordRepository;
 use Doctrine\Common\Collections\Collection;
@@ -33,18 +34,45 @@ class ArticleController extends AdminController
             'text' => 'Gérer les articles',
             'urlPath' => 'admin_articles_list'
         ];
-        $données = $articleRepository->getArticlesAdminList();
+
+        // Pour les fomulaires de publication ou de suppression d'article
+        // un seul formulaire de chaque, géré en js
+        $message = '';
+        $article = new Article();
+        $publishForm = $this->createForm(PublishArticleFormType::class, $article);
+
+        $publishForm->handleRequest($request);
+
+        if ($publishForm->isSubmitted() && $publishForm->isValid()) {
+            $newInfosArticles = $publishForm->getData();
+            $article = $articleRepository->findOneBy(['slug' => $newInfosArticles->getSlug()]);
+            $article->setPublished($newInfosArticles->getPublished());
+            $doctrine = $this->getDoctrine()->getManager();
+            $doctrine->persist($article);
+            $doctrine->flush();
+
+            if ($article->getPublished()) {
+                $message = 'L\'article ' . $article->getTitle() . ' est maintenant publié.';
+            } else {
+                $message = 'L\'article ' . $article->getTitle() . ' n\'est plus publié.';
+            }
+        }
+
+        // Pour la liste des articles
+        $articlesData = $articleRepository->getArticlesAdminList();
 
         $articles = $paginator->paginate(
-            $données, // Requête contenant les données à paginer
+            $articlesData, // Requête contenant les données à paginer
             $request->query->getInt('page', 1), // Numéro de la page demandée via url, 1 si aucune page
-            25 // le nombre d'articles par page
+            2 // le nombre d'articles par page
         );
 
         return $this->render('admin/article/list.html.twig', [
             'heroImgName' => $this->heroImgName,
             'navigationInfos' => $this->navigationInfos,
             'contentNavigation' => $this->contentNavigation,
+            'articlePublishForm' => $publishForm->createView(),
+            'lastArticleMessage' => $message,
             'articles' => $articles
         ]);
     }

@@ -59,6 +59,7 @@
 
           &-published {
             text-align: center;
+            cursor: pointer;
 
             &[data-published="0"]::before {
               content: '';
@@ -69,7 +70,7 @@
               height: 2.2rem;
               color: $color-primary-dark;
               background-color: $color-grey;
-              transition: all 1s;
+              transition: all .5s;
             }
 
             &[data-published="1"] {
@@ -86,7 +87,7 @@
               width: 12px;
               height: 22px;
               margin-right: 16px;
-              transition: all 0.5s;
+              transition: all 0.3s;
             }
           }
 

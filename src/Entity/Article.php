@@ -97,6 +97,13 @@ class Article
         return $this->id;
     }
 
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
     public function getSlug(): ?string
     {
         return $this->slug;
