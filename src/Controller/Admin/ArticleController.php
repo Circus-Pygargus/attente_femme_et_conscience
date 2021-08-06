@@ -72,6 +72,7 @@ class ArticleController extends AdminController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $article->setUser($this->getUser());
+            $article->setPublished(false);
             // Todo décommenter une fois functionnel
 //            $article = $this->handleKeyWordsOnCreation($article);
             $doctrine = $this->getDoctrine()->getManager();
