@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\ArticleRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,7 +21,11 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="list")
      */
-    public function list (): Response
+    public function list (
+        Request $request,
+        ArticleRepository $articleRepository,
+        PaginatorInterface $paginator
+    ): Response
     {
         $navbarInfos = [
             'page' => 'articles'
@@ -57,15 +64,25 @@ class ArticleController extends AbstractController
         ];
         $content = [
             'subLayout' => 'article.html.twig',
-            'list' => [
-                0 => [
-                    'title' => 'Reprenons notre pouvoir'
-                ],
-                1 => [
-                    'title' => 'Article 2'
-                ]
-            ]
+//            'list' => [
+//                0 => [
+//                    'title' => 'Reprenons notre pouvoir'
+//                ],
+//                1 => [
+//                    'title' => 'Article 2'
+//                ]
+//            ]
         ];
+
+        $articlesData = $articleRepository->getArticlesList();
+
+        $content['list'] = $paginator->paginate(
+            $articlesData, // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page demandée via url, 1 si aucune page
+            2 // le nombre d'articles par page
+        );
+
+
 
         return $this->render('blog-content/index.html.twig', [
             'heroImgName' => $this->heroImgName,

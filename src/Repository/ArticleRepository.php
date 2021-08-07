@@ -58,4 +58,16 @@ class ArticleRepository extends ServiceEntityRepository
 
         return $query->execute();
     }
+
+    public function getArticlesList (): array
+    {
+        $dql = $this->createQueryBuilder('a')
+            ->select('a.slug, a.title')
+            ->where('a.published = 1')
+            ->orderBy('a.createdAt', 'DESC');
+
+        $query = $dql->getQuery();
+
+        return $query->execute();
+    }
 }

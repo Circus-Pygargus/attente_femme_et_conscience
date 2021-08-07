@@ -24,6 +24,7 @@
                 {% else %}
                     {{ content.noContentMsg }}
                 {% endfor %}
+                    {{ knp_pagination_render(content.list) }}
                 </div>
             {% else %}
                 <div class="element-details">

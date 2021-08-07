@@ -1,3 +1,8 @@
 <div class="article">
-    <div class="title">{{ element.title }}</div>
+    <a
+        href="{{ path('articles_show_one', {slug: element.slug }) }}"
+        class="title"
+    >
+        {{ element.title }}
+    </a>
 </div>
