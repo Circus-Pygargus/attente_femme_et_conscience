@@ -32,7 +32,7 @@
                         <span class="category">{{ content.category }}</span>
                     {% endif %}
                     <h2 class="title">{{ content.title }}</h2>
-                    <div class="content">{{ content.text | raw }}</div>
+                    <div class="content">{{ content.content | raw }}</div>
                     {% if content.reservationLink is defined %}
                         <a href="{{ content.reservationLlink }}" class="btn btn-dark">Reserver</a>
                     {% endif %}

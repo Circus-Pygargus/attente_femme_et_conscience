@@ -96,7 +96,10 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{slug}", name="show_one")
      */
-    public function showOne ($slug): Response
+    public function showOne (
+        string $slug,
+        ArticleRepository $articleRepository
+    ): Response
     {
         $navbarInfos = [
             'page' => 'articles'
@@ -142,15 +145,17 @@ class ArticleController extends AbstractController
                 ]
             ]
         ];
-        $content = [
-            'slug' => '1',
-            'title' => 'Reprenons notre pouvoir',
-            'text' => '<p>Dans ce que l’on peut voir, entendre ou lire concernant les Femmes
-actuellement, nous avons en tant que Femme notre responsabilité.
-Nous pouvons chacune à notre niveau être actrice du changement.</p><p>Pour paraphraser la citation de Gandhi :
-“Femmes, soyez le changement que vous voulez voir dans ce monde !”</p><p>La Bienveillance comment d’abord par nous-même.
-Et elle est aussi à l’égard des autres Femmes. </p>'
-        ];
+//        $content = [
+//            'slug' => '1',
+//            'title' => 'Reprenons notre pouvoir',
+//            'text' => '<p>Dans ce que l’on peut voir, entendre ou lire concernant les Femmes
+//actuellement, nous avons en tant que Femme notre responsabilité.
+//Nous pouvons chacune à notre niveau être actrice du changement.</p><p>Pour paraphraser la citation de Gandhi :
+//“Femmes, soyez le changement que vous voulez voir dans ce monde !”</p><p>La Bienveillance comment d’abord par nous-même.
+//Et elle est aussi à l’égard des autres Femmes. </p>'
+//        ];
+        $content = $articleRepository->findOneBy(['slug' => $slug]);
+//dd($content);
 
         return $this->render('blog-content/index.html.twig', [
             'heroImgName' => $this->heroImgName,
