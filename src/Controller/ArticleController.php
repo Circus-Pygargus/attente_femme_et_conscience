@@ -63,6 +63,8 @@ class ArticleController extends AbstractController
             ]
         ];
         $content = [
+            'page' => 'Les articles',
+            'noContentMsg' => 'Pas d\'article publié pour le moment.',
             'subLayout' => 'article.html.twig',
 //            'list' => [
 //                0 => [

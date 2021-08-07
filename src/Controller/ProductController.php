@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\Traits\AccompanimentAndFormationTrait;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,7 +18,10 @@ class ProductController extends AbstractController
     /**
      * @Route("/produits", name="products")
      */
-    public function list (): Response
+    public function list (
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response
     {
         $navbarInfos = [
             'page' => 'accompaniment-and-formation'
@@ -77,6 +82,8 @@ class ProductController extends AbstractController
         $contentNavigation = $this->getAccompanimentsAndFormationsLinks();
         $content = [
             'page' => 'Produits',
+            'noContentMsg' => 'Pas de produit répertorié pour le moment.',
+            'subLayout' => 'product.html.twig',
             'list' => [
                 0 => [
                     'title' => 'Produit 1'
@@ -86,6 +93,21 @@ class ProductController extends AbstractController
                 ]
             ]
         ];
+
+        $productsData = [
+            0 => [
+                'title' => 'Produit 1'
+            ],
+            1 => [
+                'title' => 'Produit 2'
+            ]
+        ];
+
+        $content['list'] = $paginator->paginate(
+            $productsData, // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page demandée via url, 1 si aucune page
+            2 // le nombre d'articles par page
+        );
 
         return $this->render('blog-content/index.html.twig', [
             'heroImgName' => $this->heroImgName,
