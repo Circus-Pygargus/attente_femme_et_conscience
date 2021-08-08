@@ -43,25 +43,27 @@ class ArticleController extends AbstractController
         $contentNavigation = [
             'title' => 'Articles',
             'subLink' => 'articles_show_one',
-            'links' => [
-                [
-                    'slug' => '1',
-                    'title' => 'Reprenons notre pouvoir'
-                ],
-                [
-                    'slug' => '2',
-                    'title' => 'article 2'
-                ],
-                [
-                    'slug' => '3',
-                    'title' => 'article 3'
-                ],
-                [
-                    'slug' => '4',
-                    'title' => 'article 4'
-                ]
-            ]
+//            'links' => [
+//                [
+//                    'slug' => '1',
+//                    'title' => 'Reprenons notre pouvoir'
+//                ],
+//                [
+//                    'slug' => '2',
+//                    'title' => 'article 2'
+//                ],
+//                [
+//                    'slug' => '3',
+//                    'title' => 'article 3'
+//                ],
+//                [
+//                    'slug' => '4',
+//                    'title' => 'article 4'
+//                ]
+//            ]
         ];
+        $contentNavigation['links'] = $articleRepository->getArticlesNavigationList();
+
         $content = [
             'page' => 'Les articles',
             'noContentMsg' => 'Pas d\'article publié pour le moment.',
@@ -124,29 +126,34 @@ class ArticleController extends AbstractController
         $contentNavigation = [
             'title' => 'Articles',
             'subLink' => 'articles_show_one',
-            'links' => [
-                [
-                    'category' => 'articles',
-                    'slug' => '1',
-                    'title' => 'Reprenons notre pouvoir'
-                ],
-                [
-                    'category' => 'articles',
-                    'slug' => '2',
-                    'title' => 'article 2'
-                ],
-                [
-                    'category' => 'articles',
-                    'slug' => '3',
-                    'title' => 'article 3'
-                ],
-                [
-                    'category' => 'articles',
-                    'slug' => '4',
-                    'title' => 'article 4'
-                ]
-            ]
+//            'links' => [
+//                [
+//                    'category' => 'articles',
+//                    'slug' => '1',
+//                    'title' => 'Reprenons notre pouvoir'
+//                ],
+//                [
+//                    'category' => 'articles',
+//                    'slug' => '2',
+//                    'title' => 'article 2'
+//                ],
+//                [
+//                    'category' => 'articles',
+//                    'slug' => '3',
+//                    'title' => 'article 3'
+//                ],
+//                [
+//                    'category' => 'articles',
+//                    'slug' => '4',
+//                    'title' => 'article 4'
+//                ]
+//            ]
         ];
+        $contentNavigation['links'] = $articleRepository->getArticlesNavigationList();
+        foreach ($contentNavigation['links'] as $link) {
+            $link['categorie'] = 'article';
+        }
+
 //        $content = [
 //            'slug' => '1',
 //            'title' => 'Reprenons notre pouvoir',

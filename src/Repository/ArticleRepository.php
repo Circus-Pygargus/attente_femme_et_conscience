@@ -48,6 +48,11 @@ class ArticleRepository extends ServiceEntityRepository
     }
     */
 
+
+    /**
+     * Retourne une liste d'infos concernant les articles pour les admins
+     * (slug, titre, publié)
+     */
     public function getArticlesAdminList (): array
     {
         $dql = $this->createQueryBuilder('a')
@@ -59,12 +64,34 @@ class ArticleRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+    /**
+     * Retourne une liste d'infos concernant les articles pour les utilisateurs
+     * (slug, titre, image, extrait)
+     */
     public function getArticlesList (): array
     {
         $dql = $this->createQueryBuilder('a')
             ->select('a.slug, a.title')
             ->where('a.published = 1')
             ->orderBy('a.createdAt', 'DESC');
+
+        $query = $dql->getQuery();
+
+        return $query->execute();
+    }
+
+    /**
+     * Retourne une liste d'infos concernant les articles pour les utilisateurs
+     * à utiliser dans la colonne de navigation
+     * (slug, titre)
+     */
+    public function getArticlesNavigationList (): array
+    {
+        $dql = $this->createQueryBuilder('a')
+            ->select('a.slug, a.title')
+            ->where('a.published = 1')
+            ->orderBy('a.createdAt', 'DESC')
+            ->setMaxResults(3);
 
         $query = $dql->getQuery();
 
