@@ -97,4 +97,22 @@ class ArticleRepository extends ServiceEntityRepository
 
         return $query->execute();
     }
+
+    /**
+     * Retourne le dernier article
+     */
+    public function getLastArticle (): Article
+    {
+        $dql = $this->createQueryBuilder('a')
+            ->select('a.slug, a.title, a.featuredImage, a.content')
+            ->where('a.published = 1')
+            ->orderBy('a.createdAt', 'DESC')
+            ->setMaxResults(1);
+
+        $query = $dql->getQuery();
+
+        $toto = $query->execute();
+        dd($toto);
+        return $toto;
+    }
 }

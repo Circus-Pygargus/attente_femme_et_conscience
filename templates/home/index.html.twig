@@ -37,11 +37,11 @@
         </div>
         <div class="last-article u-margin-bottom-medium">
             <div class="last-article--box">
-                <img src="{{ asset( 'build/img/' ~ lastArticle.image ) }}" class="last-article--img">
+                <img src="{{ asset( 'uploads/images/mise-en-avant/' ~ lastArticle.featuredImage ) }}" class="last-article--img">
                 <div class="last-article--sub-title">Dernier article</div>
                 <div class="last-article--separator"></div>
                 <div class="last-article--title">{{ lastArticle.title }}</div>
-                <p class="last-article--excerpt">{{ lastArticle.excerpt }}</p>
+                <p class="last-article--excerpt">{{ lastArticle.content|striptags > 40 ? lastArticle.content|striptags|slice(0, 41)|split(' ')|slice(0, -1)|join(' ') ~ '…' : lastArticle.content|striptags }}</p>
                 <a class="btn btn-dark">Lire la suite !</a>
             </div>
         </div>
