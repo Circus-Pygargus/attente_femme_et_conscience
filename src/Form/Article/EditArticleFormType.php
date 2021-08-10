@@ -29,6 +29,9 @@ class EditArticleFormType extends AbstractType
                 'label' => 'Image mise en avant',
                 'required' => false
             ])
+            ->add('featuredImageAlt', TextType::class, [
+                'label' => 'Texte alternatif à l\'image mise en avant'
+            ])
             ->add('keyWordsString', TextType::class, [
                 'label' => 'Mots clés'
             ])

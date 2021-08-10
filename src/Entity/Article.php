@@ -33,6 +33,7 @@ class Article
      * @ORM\Column(type="string", length=255)
      */
     private $title;
+
     /**
      * @ORM\Column(type="string", length=255)
      * @var string
@@ -44,6 +45,12 @@ class Article
      * @var File
      */
     private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $featuredImageAlt;
 
     /**
      * @ORM\Column(type="text")
@@ -121,12 +128,12 @@ class Article
         return $this;
     }
 
-    public function getFeaturedImage()
+    public function getFeaturedImage(): ?string
     {
         return $this->featuredImage;
     }
 
-    public function setFeaturedImage($featuredImage)
+    public function setFeaturedImage(string $featuredImage): self
     {
         $this->featuredImage = $featuredImage;
 
@@ -145,6 +152,18 @@ class Article
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    public function setFeaturedImageAlt (string $featuredImageAlt): self
+    {
+        $this->featuredImageAlt = $featuredImageAlt;
+
+        return $this;
+    }
+
+    public function getFeaturedImageAlt (): ?string
+    {
+        return $this->featuredImageAlt;
     }
 
     public function getContent(): ?string

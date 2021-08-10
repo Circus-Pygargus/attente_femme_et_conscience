@@ -44,7 +44,11 @@
             <div class="last-article--box">
 {#                <img src="{{ asset( 'uploads/images/mise-en-avant/' ~ lastArticle.featuredImage ) }}" class="last-article--img"> #}
                 <div class="last-article--img-container">
-                    <img src="{{ vich_uploader_asset(lastArticle, 'imageFile')|imagine_filter('mise_en_avant') }}" class="last-article--img-container--img">
+                    <img
+                        src="{{ vich_uploader_asset(lastArticle, 'imageFile')|imagine_filter('mise_en_avant') }}"
+                        alt="{{ lastArticle.featuredImageAlt }}"
+                        class="last-article--img-container--img"
+                    >
                 </div>
                 <div class="last-article--sub-title">Dernier article</div>
                 <div class="last-article--separator"></div>

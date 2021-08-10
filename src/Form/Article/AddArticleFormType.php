@@ -28,6 +28,9 @@ class AddArticleFormType extends AbstractType
             ->add('imageFile', VichImageType::class, [
                 'label' => 'Image mise en avant'
             ])
+            ->add('featuredImageAlt', TextType::class, [
+                'label' => 'Texte alternatif à l\'image mise en avant'
+            ])
             ->add('keyWordsString', TextType::class, [
                 'label' => 'Mots clés'
             ])
