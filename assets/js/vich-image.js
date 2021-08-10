@@ -1,15 +1,6 @@
 const vichImageManager = function () {
     const vichContainer = document.querySelector('.vich-image');
 
-    const buildUploadButton = (imageFileInput) => {
-        const vichLabel = vichContainer.parentElement.firstChild;
-        const vichCloneLabel = vichLabel.cloneNode(true);
-        vichCloneLabel.htmlFor = imageFileInput.id;
-        vichCloneLabel.classList.add('cloned', 'btn', 'btn-light');
-        vichCloneLabel.innerHTML = 'Uploader une image';
-        vichLabel.parentNode.insertBefore(vichCloneLabel, vichLabel.nextSibling);
-    }
-
     const fileTypes = [
         'image/jpg',
         'image/jpeg',
@@ -49,20 +40,29 @@ const vichImageManager = function () {
     };
 
     if (vichContainer) {
-        const imageFileInput = vichContainer.querySelector('#edit_article_form_imageFile_file');
+        const imageFileInput = vichContainer.querySelector('input[type="file"]');
+        const buildUploadButton = () => {
+            const vichLabel = vichContainer.parentElement.firstChild;
+            const vichCloneLabel = vichLabel.cloneNode(true);
+            vichCloneLabel.htmlFor = imageFileInput.id;
+            vichCloneLabel.classList.add('cloned', 'btn', 'btn-light');
+            vichCloneLabel.innerHTML = 'Uploader une image';
+            vichLabel.parentNode.insertBefore(vichCloneLabel, vichLabel.nextSibling);
+        }
+
         // Hide the delete button
         const vichDeleteInput = vichContainer.querySelector('input[type="checkbox"][name$="[delete]"]');
         if (vichDeleteInput) {
             vichDeleteInput.parentElement.style.display = 'none';
         }
 
-
+        // Build a button to activate the hidden input type file
+        buildUploadButton();
 
         const vichLinks = vichContainer.querySelectorAll('a');
         // Edit page
         if (vichLinks.length) {
-            // Build a button to activate the hidden input type file
-            buildUploadButton(imageFileInput);
+            const imageFileInput = vichContainer.querySelector('#edit_article_form_imageFile_file');
 
             vichLinks.forEach(link => {
                 // Hide the download button
@@ -86,18 +86,13 @@ const vichImageManager = function () {
         }
         // Create page
         else {
-            const imageFileInput = vichContainer.firstChild;
-            if (imageFileInput.tagName === 'INPUT' && imageFileInput.type === 'file') {
-                buildUploadButton(imageFileInput);
-
-                // build a div to display image
-                const imgBox = document.createElement('DIV');
-                vichContainer.appendChild(imgBox);
-                imageFileInput.addEventListener('change', (e) => {
-                    // Update the displayed image
-                    updateImageDisplay(imageFileInput, imgBox);
-                });
-            }
+            // build a div to display image
+            const imgBox = document.createElement('DIV');
+            vichContainer.appendChild(imgBox);
+            imageFileInput.addEventListener('change', (e) => {
+                // Update the displayed image
+                updateImageDisplay(imageFileInput, imgBox);
+            });
         }
     }
 };
