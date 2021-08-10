@@ -4,8 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Controller\Admin\AdminController;
 use App\Entity\Article;
-use App\Form\AddArticleFormType;
-use App\Form\PublishArticleFormType;
+use App\Form\Article\AddArticleFormType;
+use App\Form\Article\EditArticleFormType;
+use App\Form\Article\PublishArticleFormType;
 use App\Repository\ArticleRepository;
 use App\Repository\KeyWordRepository;
 use Doctrine\Common\Collections\Collection;
@@ -139,7 +140,7 @@ class ArticleController extends AdminController
             $article = new Article();
         }
 
-        $form = $this->createForm(AddArticleFormType::class, $article);
+        $form = $this->createForm(EditArticleFormType::class, $article);
 
         $form->handleRequest($request);
 
