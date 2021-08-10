@@ -32,8 +32,12 @@ class EditArticleFormType extends AbstractType
             ->add('keyWordsString', TextType::class, [
                 'label' => 'Mots clés'
             ])
-            ->add('Enregistrer', SubmitType::class)
-        ;
+            ->add('submit', SubmitType::class, [
+                'label' => 'Enregistrer',
+                'attr' => [
+                    'class' => 'btn btn-inverted'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
