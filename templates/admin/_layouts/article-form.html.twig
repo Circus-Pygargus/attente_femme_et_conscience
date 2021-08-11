@@ -1,0 +1,54 @@
+{{ form_start(articleForm, {
+    'attr': {
+        'novalidate': 'novalidate',
+        'class': 'form wysiwyg-form'
+    }
+}) }}
+    <div class="error">
+        {{ form_errors(articleForm) }}
+    </div>
+
+    <div class="form-group" data-children-count="1">
+        {{ form_label(articleForm.title) }}
+        <div class="error">
+            {{ form_errors(articleForm.title) }}
+        </div>
+        {{ form_widget(articleForm.title) }}
+    </div>
+
+    <div class="form-group" data-children-count="1">
+        {{ form_label(articleForm.imageFile) }}
+        <div class="error">
+            {{ form_errors(articleForm.imageFile) }}
+        </div>
+        {{ form_widget(articleForm.imageFile) }}
+    </div>
+
+    <div class="form-group" data-children-count="1">
+        {{ form_label(articleForm.featuredImageAlt) }}
+        <div class="error">
+            {{ form_errors(articleForm.featuredImageAlt) }}
+        </div>
+        {{ form_widget(articleForm.featuredImageAlt) }}
+    </div>
+
+    <div class="form-group" data-children-count="1">
+        {{ form_label(articleForm.keyWordsString) }}
+        <div class="error">
+            {{ form_errors(articleForm.keyWordsString) }}
+        </div>
+        {{ form_widget(articleForm.keyWordsString) }}
+    </div>
+
+    <div class="form-group" data-children-count="1">
+        {{ form_label(articleForm.content) }}
+        <div class="error">
+            {{ form_errors(articleForm.content) }}
+        </div>
+        {{ form_widget(articleForm.content) }}
+    </div>
+
+    <div class="form-group" data-children-count="1">
+        {{ form_row(articleForm.submit) }}
+    </div>
+{{ form_end(articleForm) }}

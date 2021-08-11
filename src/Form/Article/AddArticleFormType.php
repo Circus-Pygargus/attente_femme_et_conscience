@@ -11,7 +11,11 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Mime\MimeTypes;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AddArticleFormType extends AbstractType
@@ -20,19 +24,53 @@ class AddArticleFormType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Titre'
-            ])
-            ->add('content', CKEditorType::class, [
-                'label' =>'Contenu'
+                'label' => 'Titre',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci d\'entrer un titre pour cet article',
+                    ])
+                ]
             ])
             ->add('imageFile', VichImageType::class, [
-                'label' => 'Image mise en avant'
+                'label' => 'Image mise en avant',
+                'constraints' => [
+                    new Image([
+                        'maxSize' => '2M',
+                        'mimeTypes' => [
+                            "image/jpeg",
+                            "image/jpeg",
+                            "image/png"
+                        ],
+                        'mimeTypesMessage' => 'Merci de choisir un fichier de type image',
+                    ]),
+                    new NotNull([
+                        'message' => 'Merci d\'ajouter une image de mise en avant',
+                    ])
+                ]
             ])
             ->add('featuredImageAlt', TextType::class, [
-                'label' => 'Texte alternatif à l\'image mise en avant'
+                'label' => 'Texte alternatif à l\'image mise en avant',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci d\'entrer un texte alternatif pour l\'image',
+                    ])
+                ]
             ])
             ->add('keyWordsString', TextType::class, [
-                'label' => 'Mots clés'
+                'label' => 'Mots clés',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci d\'entrer au moins un mot clé',
+                    ])
+                ]
+            ])
+            ->add('content', CKEditorType::class, [
+                'label' =>'Contenu',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci d\'ajouter du contenu à cet article',
+                    ])
+                ]
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',

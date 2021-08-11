@@ -42,7 +42,7 @@ const vichImageManager = function () {
     if (vichContainer) {
         const imageFileInput = vichContainer.querySelector('input[type="file"]');
         const buildUploadButton = () => {
-            const vichLabel = vichContainer.parentElement.firstChild;
+            const vichLabel = vichContainer.parentElement.querySelector('label:first-of-type');
             const vichCloneLabel = vichLabel.cloneNode(true);
             vichCloneLabel.htmlFor = imageFileInput.id;
             vichCloneLabel.classList.add('cloned', 'btn', 'btn-light');

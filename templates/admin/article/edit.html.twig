@@ -3,5 +3,5 @@
 {% block adminContent %}
     <h2 class="title">Éditer un article</h2>
 
-    {{ form(articleForm) }}
+    {% include 'admin/_layouts/article-form.html.twig' %}
 {% endblock %}
