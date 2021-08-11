@@ -49,7 +49,8 @@ const vichImageManager = function () {
             vichCloneLabel.htmlFor = imageFileInput.id;
             vichCloneLabel.classList.add('cloned', 'btn', 'btn-light');
             vichCloneLabel.innerHTML = 'Uploader une image';
-            vichLabel.parentNode.insertBefore(vichCloneLabel, vichLabel.nextSibling);
+            // vichLabel.parentNode.insertBefore(vichCloneLabel, vichLabel.nextSibling);
+            vichLabel.parentNode.insertBefore(vichCloneLabel, vichContainer);
         }
 
         // Hide the delete button
