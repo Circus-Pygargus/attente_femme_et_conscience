@@ -31,6 +31,7 @@
 .wysiwyg-form {
 
   .error {
+    text-align: right;
     color: #ba0101;
   }
 
@@ -40,11 +41,19 @@
     label:not(.cloned) {
       display: block;
       margin-bottom: 1rem;
+      margin-top: 3rem;
+      color: $color-primary-dark;
+    }
+
+    // Upload image file btn
+    label.cloned {
+      margin-bottom: 1.5rem;
     }
 
     input {
       width: 100%;
       margin-left: 0;
+      color: $color-primary-dark;
     }
   }
 }

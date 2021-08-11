@@ -41,6 +41,8 @@ const vichImageManager = function () {
 
     if (vichContainer) {
         const imageFileInput = vichContainer.querySelector('input[type="file"]');
+        const vichDeleteInput = vichContainer.querySelector('input[type="checkbox"][name$="[delete]"]');
+        const vichLinks = vichContainer.querySelectorAll('a');
         const buildUploadButton = () => {
             const vichLabel = vichContainer.parentElement.querySelector('label:first-of-type');
             const vichCloneLabel = vichLabel.cloneNode(true);
@@ -51,7 +53,6 @@ const vichImageManager = function () {
         }
 
         // Hide the delete button
-        const vichDeleteInput = vichContainer.querySelector('input[type="checkbox"][name$="[delete]"]');
         if (vichDeleteInput) {
             vichDeleteInput.parentElement.style.display = 'none';
         }
@@ -59,7 +60,6 @@ const vichImageManager = function () {
         // Build a button to activate the hidden input type file
         buildUploadButton();
 
-        const vichLinks = vichContainer.querySelectorAll('a');
         // Edit page
         if (vichLinks.length) {
             const imageFileInput = vichContainer.querySelector('#edit_article_form_imageFile_file');
