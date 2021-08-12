@@ -56,4 +56,25 @@
       color: $color-primary-dark;
     }
   }
+
+  .checkboxes-form-group {
+
+    div:not(.error) {
+
+      label {
+        display:inline-block;
+        text-transform: capitalize;
+        margin-top: 0;
+        margin-left: 1rem;
+
+        &:not(last-of-type) {
+          margin-right: 5rem;
+        }
+      }
+
+      input {
+        width: auto;
+      }
+    }
+  }
 }
