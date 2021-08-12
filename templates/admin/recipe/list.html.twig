@@ -17,7 +17,11 @@
             {% for recipe in recipes %}
                 <tr class="element">
                     <td class="element-title">
-                        <a href="#">
+                        <a
+                            href="{{ path('admin_recipes_edit', {
+                                slug: recipe.slug
+                            }) }}"
+                        >
                             {{ recipe.title }}
                         </a>
                     </td>
