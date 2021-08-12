@@ -4,7 +4,7 @@ window.addEventListener('load', () => {
     const publishSlugInput = publishForm.querySelector('#publish_article_form_slug');
     const publishInput = publishForm.querySelector('#publish_article_form_published');
 
-    const publishBtns = document.querySelectorAll('.article-published');
+    const publishBtns = document.querySelectorAll('.element-published');
 
     publishBtns.forEach(publishBtn => {
         publishBtn.addEventListener('click', (e) => {
