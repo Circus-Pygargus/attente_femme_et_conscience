@@ -1,0 +1,36 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block adminContent %}
+    <h2 class="title">Gérer les recettes</h2>
+
+    <div><a href="{{ path('admin_recipes_create') }}" class="btn btn-inverted">Créer</a></div>
+
+    {%  if recipes|length > 0 %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="modify">Modifier</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for recipe in recipes %}
+                <tr class="element">
+                    <td class="element-title">
+                        <a href="#">
+                            {{ recipe.title }}
+                        </a>
+                    </td>
+                    <td class="element-delete">
+                        <a href="#">X</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {{ knp_pagination_render(recipes) }}
+    {% else %}
+        <p class="empty-array">Il n'y a aucune recette enregistrée.</p>
+    {% endif %}
+{% endblock %}
