@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AdminController;
 use App\Entity\Recipe;
 use App\Form\Recipe\AddRecipeFormType;
+use App\Repository\RecipeRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +21,31 @@ class RecipeController extends AdminController
     /**
      * @Route("/", name="list")
      */
-    public function list (): Response
+    public function list (
+        Request $request,
+        RecipeRepository $recipeRepository,
+        PaginatorInterface $paginator
+    ): Response
     {
-        return new Response();
+        $this->navigationInfos[] = [
+            'text' => 'Gérer les recettes',
+            'urlPath' => 'admin_recipes_list'
+        ];
+
+        $recipeData = $recipeRepository->findAll();
+
+        $recipes = $paginator->paginate(
+            $recipeData, // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page demandée via url, 1 si aucune page
+            2 // le nombre d'articles par page
+        );
+
+        return $this->render('admin/recipe/list.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'recipes' => $recipes
+        ]);
     }
 
     /**
