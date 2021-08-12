@@ -75,6 +75,14 @@
 
           &-title {
             font-size: 2rem;
+
+            a, a:visited {
+              color: $color-primary-dark;
+
+              &:hover {
+                color: $color-primary-light;
+              }
+            }
           }
 
           &-published {
