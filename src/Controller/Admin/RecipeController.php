@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AdminController;
 use App\Entity\Recipe;
 use App\Form\Recipe\AddRecipeFormType;
+use App\Form\Recipe\EditRecipeFormType;
 use App\Repository\RecipeRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,6 +82,51 @@ class RecipeController extends AdminController
         }
 
         return $this->render('admin/recipe/create.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'recipeForm' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/edit/{slug}", name="edit")
+     */
+    public function edit (
+        string $slug = '',
+        Request $request,
+        RecipeRepository $recipeRepository
+    ): Response
+    {
+        $this->navigationInfos[] = [
+            'text' => 'Gérer les recettes',
+            'urlPath' => 'admin_recipes_list'
+        ];
+        $this->navigationInfos[] = [
+            'text' => 'Éditer une recettes',
+            'urlPath' => 'admin_recipes_edit'
+        ];
+
+        if ($slug != '') {
+            $recipe = $recipeRepository->findOneBy(['slug' => $slug]);
+        } else {
+            dd('Etrange');
+            $recipe = new Recipe();
+        }
+
+        $form = $this->createForm(EditRecipeFormType::class, $recipe);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($recipe);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_recipes_list');
+        }
+
+        return $this->render('admin/recipe/edit.html.twig', [
             'heroImgName' => $this->heroImgName,
             'navigationInfos' => $this->navigationInfos,
             'contentNavigation' => $this->contentNavigation,
