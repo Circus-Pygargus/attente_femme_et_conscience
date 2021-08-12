@@ -63,7 +63,7 @@ const vichImageManager = function () {
 
         // Edit page
         if (vichLinks.length) {
-            const imageFileInput = vichContainer.querySelector('#edit_article_form_imageFile_file');
+            const imageFileInput = vichContainer.querySelector('input[type="file"][id$="_form_imageFile_file"]');
 
             vichLinks.forEach(link => {
                 // Hide the download button
