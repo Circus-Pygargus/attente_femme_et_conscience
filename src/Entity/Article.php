@@ -121,7 +121,7 @@ class Article
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -154,7 +154,7 @@ class Article
         return $this->imageFile;
     }
 
-    public function setFeaturedImageAlt (string $featuredImageAlt): self
+    public function setFeaturedImageAlt (?string $featuredImageAlt): self
     {
         $this->featuredImageAlt = $featuredImageAlt;
 
@@ -171,7 +171,7 @@ class Article
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(?string $content): self
     {
         $this->content = $content;
 
@@ -236,7 +236,7 @@ class Article
         return $this;
     }
 
-    public function setKeyWordsString (string $keyWordString): self
+    public function setKeyWordsString (?string $keyWordString): self
     {
         $this->keyWordsString = $keyWordString;
 

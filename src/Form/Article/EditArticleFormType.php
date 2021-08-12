@@ -43,9 +43,9 @@ class EditArticleFormType extends AbstractType
                         ],
                         'mimeTypesMessage' => 'Merci de choisir un fichier de type image',
                     ]),
-                    new NotNull([
-                        'message' => 'Merci d\'ajouter une image de mise en avant',
-                    ])
+//                    new NotNull([
+//                        'message' => 'Merci d\'ajouter une image de mise en avant',
+//                    ])
                 ]
             ])
             ->add('featuredImageAlt', TextType::class, [
