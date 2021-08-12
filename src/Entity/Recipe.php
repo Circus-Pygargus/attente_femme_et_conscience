@@ -76,6 +76,11 @@ class Recipe
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $keyWordsString;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -187,6 +192,18 @@ class Recipe
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getKeyWordsString(): ?string
+    {
+        return $this->keyWordsString;
+    }
+
+    public function setKeyWordsString(string $keyWordsString): self
+    {
+        $this->keyWordsString = $keyWordsString;
 
         return $this;
     }
