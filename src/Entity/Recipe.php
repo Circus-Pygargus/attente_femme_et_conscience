@@ -103,7 +103,7 @@ class Recipe
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -141,7 +141,7 @@ class Recipe
         return $this->featuredImageAlt;
     }
 
-    public function setFeaturedImageAlt(string $featuredImageAlt): self
+    public function setFeaturedImageAlt(?string $featuredImageAlt): self
     {
         $this->featuredImageAlt = $featuredImageAlt;
 
@@ -165,7 +165,7 @@ class Recipe
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(?string $content): self
     {
         $this->content = $content;
 
@@ -201,7 +201,7 @@ class Recipe
         return $this->keyWordsString;
     }
 
-    public function setKeyWordsString(string $keyWordsString): self
+    public function setKeyWordsString(?string $keyWordsString): self
     {
         $this->keyWordsString = $keyWordsString;
 
