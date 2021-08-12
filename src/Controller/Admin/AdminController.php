@@ -39,6 +39,10 @@ class AdminController extends AbstractController
                     'urlPath' => 'admin'
                 ],
                 [
+                    'label' => 'Recettes',
+                    'urlPath' => 'admin_recipes_list'
+                ],
+                [
                     'label' => 'Lettres d\'informations',
                     'urlPath' => 'admin'
                 ],

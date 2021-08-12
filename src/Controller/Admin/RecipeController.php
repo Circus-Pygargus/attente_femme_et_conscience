@@ -18,6 +18,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RecipeController extends AdminController
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->contentNavigation['inUseRegex'] = 'admin_recipes';
+    }
+
     /**
      * @Route("/", name="list")
      */
@@ -61,7 +67,6 @@ class RecipeController extends AdminController
             'text' => 'Créer une recette',
             'urlPath' => 'admin_recipes_create'
         ];
-        $this->contentNavigation['inUseRegex'] = 'admin_recipes';
 
         $recipe = new Recipe();
 
