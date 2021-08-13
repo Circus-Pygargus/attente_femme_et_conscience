@@ -29,6 +29,7 @@ Encore
     .addStyleEntry('css/error-page', './assets/styles/style-error-page.scss')
     .addStyleEntry('css/admin', './assets/styles/style-admin.scss')
     .addStyleEntry('css/login', './assets/styles/style-login.scss')
+    .addStyleEntry('css/account', './assets/styles/style-account.scss')
 
     .addEntry('app', './assets/app.js')
     .addEntry('app_home', './assets/app-home.js')
