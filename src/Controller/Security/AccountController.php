@@ -32,7 +32,6 @@ class AccountController extends AbstractController
         ];
         $this->contentNavigation = [
             'title' => 'Mon Compte',
-            'inUseRegex' => 'account_base',
             'specialLinks' => [
                 [
                     'label' => 'Mes réservations',
@@ -59,6 +58,8 @@ class AccountController extends AbstractController
      */
     public function index (): Response
     {
+        $this->contentNavigation['inUseRegex'] = 'account_base';
+
         return $this->render('account/index.html.twig', [
             'heroImgName' => $this->heroImgName,
             'navigationInfos' => $this->navigationInfos,
