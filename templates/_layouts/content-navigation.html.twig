@@ -28,8 +28,8 @@
                 {% endif %}
             </div>
         {% endfor %}
-    {% elseif contentNavigation.adminLinks is defined %}
-        {% for link in contentNavigation.adminLinks %}
+    {% elseif contentNavigation.specialLinks is defined %}
+        {% for link in contentNavigation.specialLinks %}
             <a href="{{ path(link.urlPath) }}"
                 class="link
                 {% if link.urlPath starts with contentNavigation.inUseRegex %}

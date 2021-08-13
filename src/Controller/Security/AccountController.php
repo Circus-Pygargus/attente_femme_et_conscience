@@ -33,7 +33,7 @@ class AccountController extends AbstractController
         $this->contentNavigation = [
             'title' => 'Mon Compte',
             'inUseRegex' => 'account_base',
-            'adminLinks' => [
+            'specialLinks' => [
                 [
                     'label' => 'Mes réservations',
                 'urlPath' => 'account_reservation'
