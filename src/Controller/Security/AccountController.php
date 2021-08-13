@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ArticleController
  * @package App\Controller\Account
- * @Route("/account", name="account_")
+ * @Route("/mon-compte", name="account_")
  */
 class AccountController extends AbstractController
 {
@@ -68,7 +68,7 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/reservation", name="reservation")
+     * @Route("/reservations", name="reservation")
      */
     public function reservation (): Response
     {
@@ -86,7 +86,7 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/subscription", name="subscription")
+     * @Route("/abonnements", name="subscription")
      */
     public function subscription (): Response
     {
@@ -122,7 +122,7 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @Route("/disconnect", name="disconnect")
+     * @Route("/deconnexion", name="disconnect")
      */
     public function disconnect (): Response
     {

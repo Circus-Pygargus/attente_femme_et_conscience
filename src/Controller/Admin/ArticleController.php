@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class ArticleController
  * @package App\Controller\Admin
- * @Route("/admin/articles", name="admin_articles_")
+ * @Route("/gestion/articles", name="admin_articles_")
  */
 class ArticleController extends AdminController
 {
@@ -36,7 +36,7 @@ class ArticleController extends AdminController
             'urlPath' => 'admin_articles_list'
         ];
 
-        // Pour les fomulaires de publication ou de suppression d'article
+        // Pour les formulaires de publication ou de suppression d'article
         // un seul formulaire de chaque, géré en js
         $message = '';
         $article = new Article();
@@ -79,7 +79,7 @@ class ArticleController extends AdminController
     }
 
     /**
-     * @Route("/create", name="create")
+     * @Route("/nouveau", name="create")
      */
     public function create (Request $request)
     {
@@ -120,7 +120,7 @@ class ArticleController extends AdminController
     }
 
     /**
-     * @Route("/edit/{slug}", name="edit")
+     * @Route("/edite/{slug}", name="edit")
      */
     public function edit (string $slug = '', Request $request, ArticleRepository $articleRepository): Response
     {

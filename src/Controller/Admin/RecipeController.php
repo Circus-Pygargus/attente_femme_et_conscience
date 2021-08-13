@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class RecipeController
  * @package App\Controller\Admin
- * @Route("/admin/recipes", name="admin_recipes_")
+ * @Route("/admin/recettes", name="admin_recipes_")
  */
 class RecipeController extends AdminController
 {
@@ -56,7 +56,7 @@ class RecipeController extends AdminController
     }
 
     /**
-     * @Route("/create", name="create")
+     * @Route("/nouvelle", name="create")
      */
     public function create (Request $request): Response
     {
@@ -90,7 +90,7 @@ class RecipeController extends AdminController
     }
 
     /**
-     * @Route("/edit/{slug}", name="edit")
+     * @Route("/edite/{slug}", name="edit")
      */
     public function edit (
         string $slug = '',
