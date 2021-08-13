@@ -133,7 +133,7 @@ class Article
         return $this->featuredImage;
     }
 
-    public function setFeaturedImage(string $featuredImage): self
+    public function setFeaturedImage(?string $featuredImage): self
     {
         $this->featuredImage = $featuredImage;
 

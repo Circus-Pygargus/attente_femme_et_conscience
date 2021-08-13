@@ -115,6 +115,13 @@ class Recipe
         return $this->featuredImage;
     }
 
+    public function setFeaturedImage(?string $featuredImage): self
+    {
+        $this->featuredImage = $featuredImage;
+
+        return $this;
+    }
+
     public function setImageFile(File $image = null)
     {
         $this->imageFile = $image;
@@ -127,13 +134,6 @@ class Recipe
     public function getImageFile()
     {
         return $this->imageFile;
-    }
-
-    public function setFeaturedImage(string $featuredImage): self
-    {
-        $this->featuredImage = $featuredImage;
-
-        return $this;
     }
 
     public function getFeaturedImageAlt(): ?string
