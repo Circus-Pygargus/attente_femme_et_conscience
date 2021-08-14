@@ -1,8 +1,7 @@
 window.addEventListener('load', () => {
-
-    const publishForm = document.querySelector('form[name="publish_article_form"]');
-    const publishSlugInput = publishForm.querySelector('#publish_article_form_slug');
-    const publishInput = publishForm.querySelector('#publish_article_form_published');
+    const publishForm = document.querySelector('form[name^="publish"][name$="_form"]');
+    const publishSlugInput = publishForm.querySelector('input[id^="publish_"][id$="_form_slug"]');
+    const publishInput = publishForm.querySelector('input[id^="publish_"][id$="_form_published"]');
 
     const publishBtns = document.querySelectorAll('.element-published');
 
