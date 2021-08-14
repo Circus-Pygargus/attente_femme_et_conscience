@@ -76,9 +76,12 @@ class RecipeController extends AdminController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $recipe->setPublished(false);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($recipe);
             $entityManager->flush();
+
+            return $this->redirectToRoute('admin_recipes_list');
         }
 
         return $this->render('admin/recipe/create.html.twig', [
