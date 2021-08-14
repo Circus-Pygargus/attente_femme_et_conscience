@@ -4,7 +4,11 @@
     {% if contentNavigation.categories is defined %}
         {%  for category in contentNavigation.categories %}
             <div class="category">
+                {%  if category.linkAddSlug is defined %}
+                <a href="{{ path(category.link, {slug: category.linkAddSlug}) }}"
+                {% else %}
                 <a href="{{ path(category.link) }}"
+                {% endif %}
                     class="link category-link
                     {% if content.page is defined and content.page == category.name %}
                         selected
