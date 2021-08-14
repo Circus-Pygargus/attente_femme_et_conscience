@@ -1,0 +1,24 @@
+.recipe {
+  height: 15rem;
+  color: $color-primary-light;
+
+  &:not(:last-child) {
+    margin-bottom: $margin-bottom-medium;
+  }
+
+  &--img {
+    float: left;
+    height: 100%;
+    margin-right: 2.5rem;
+  }
+
+  &--title {
+    text-transform: uppercase;
+    font-size: 2.4rem;
+    margin: .9rem 0 2rem;
+  }
+
+  &--excerpt {
+    margin-bottom: 1.5rem;
+  }
+}
