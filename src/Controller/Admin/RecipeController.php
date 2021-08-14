@@ -6,6 +6,7 @@ use App\Controller\Admin\AdminController;
 use App\Entity\Recipe;
 use App\Form\Recipe\AddRecipeFormType;
 use App\Form\Recipe\EditRecipeFormType;
+use App\Form\Recipe\PublishRecipeFormType;
 use App\Repository\RecipeRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,6 +40,30 @@ class RecipeController extends AdminController
             'urlPath' => 'admin_recipes_list'
         ];
 
+        // Pour les formulaires de publication ou de suppression de recette
+        // un seul formulaire de chaque, géré en js
+        $message = '';
+        $recipe = new Recipe();
+        $publishForm = $this->createForm(PublishRecipeFormType::class, $recipe);
+
+        $publishForm->handleRequest($request);
+
+        if ($publishForm->isSubmitted() && $publishForm->isValid()) {
+            $newInfosRecipe = $publishForm->getData();
+            $recipe = $recipeRepository->findOneBy(['slug' => $newInfosRecipe->getSlug()]);
+            $recipe->setPublished($newInfosRecipe->getPublished());
+            $doctrine = $this->getDoctrine()->getManager();
+            $doctrine->persist($recipe);
+            $doctrine->flush();
+
+            if ($recipe->getPublished()) {
+                $message = 'La recette <b>' . $recipe->getTitle() . '</b> est maintenant publiée.';
+            } else {
+                $message = 'La recette <b>' . $recipe->getTitle() . '</b> n\'est plus publiée.';
+            }
+        }
+
+        // Pour la liste des recettes
         $recipeData = $recipeRepository->findAll();
 
         $recipes = $paginator->paginate(
@@ -51,6 +76,8 @@ class RecipeController extends AdminController
             'heroImgName' => $this->heroImgName,
             'navigationInfos' => $this->navigationInfos,
             'contentNavigation' => $this->contentNavigation,
+            'recipePublishForm' => $publishForm->createView(),
+            'lastRecipeMessage' => $message,
             'recipes' => $recipes
         ]);
     }
