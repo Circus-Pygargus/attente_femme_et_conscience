@@ -1,15 +1,32 @@
 {% extends 'admin/index.html.twig' %}
 
+{% block javascripts %}
+{#    {{ parent() }}#}
+    {{ encore_entry_script_tags('app_admin_publish') }}
+{% endblock %}
+
 {% block adminContent %}
     <h2 class="title">Gérer les recettes</h2>
 
     <div><a href="{{ path('admin_recipes_create') }}" class="btn btn-inverted">Créer</a></div>
+
+    <div style="display:none">
+        {{ form_start(recipePublishForm) }}
+        {{ form_widget(recipePublishForm.slug) }}
+        {{ form_widget(recipePublishForm.published) }}
+        {{ form_end(recipePublishForm) }}
+    </div>
+
+    {% if lastRecipeMessage is defined %}
+        <p class="article-published">{{ lastRecipeMessage|raw }}</p>
+    {% endif %}
 
     {%  if recipes|length > 0 %}
         <table class="table">
             <thead>
                 <tr>
                     <th class="modify">Modifier</th>
+                    <th>Publier</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
@@ -24,6 +41,13 @@
                         >
                             {{ recipe.title }}
                         </a>
+                    </td>
+                    <td>
+                        <div
+                                class="element-published"
+                                data-published="{% if recipe.published %}1{% else %}0{% endif %}"
+                                data-slug="{{ recipe.slug }}"
+                        ></div>
                     </td>
                     <td class="element-delete">
                         <a href="#">X</a>
