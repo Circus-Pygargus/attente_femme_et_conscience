@@ -61,6 +61,11 @@ class Recipe
     private $content;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $published;
+
+    /**
      * @var \DateTime $createdAt
      *
      * @Gedmo\Timestampable(on="create")
@@ -168,6 +173,18 @@ class Recipe
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getPublished(): ?bool
+    {
+        return $this->published;
+    }
+
+    public function setPublished(bool $published): self
+    {
+        $this->published = $published;
 
         return $this;
     }
