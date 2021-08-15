@@ -38,6 +38,7 @@ Trait RecipeTrait
                 'name' => 'Recettes ' . $recipeCategory->getLabel() . 's',
                 'link' => 'raw_and_living_food_category',
                 'linkAddSlug' => $recipeCategory->getSlug(),
+                'urlPathForLinks' => 'raw_and_living_food_recipe',
                 'links' => $sweetyRecipes
             ];
         }
