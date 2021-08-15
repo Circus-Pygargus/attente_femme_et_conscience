@@ -1,7 +1,11 @@
 <div class="navigation-infos">
     {% for navigationInfo in navigationInfos %}
         {% if navigationInfo.slug is defined %}
+            {%  if navigationInfo.categorySlug is defined %}
+            <a href="{{ path(navigationInfo.urlPath, {categorySlug: navigationInfo.categorySlug, elementSlug: navigationInfo.slug}) }}"
+            {% else %}
             <a href="{{ path(navigationInfo.urlPath, {slug: navigationInfo.slug}) }}"
+            {% endif %}
                 class="disabled"
             >
                 {{ navigationInfo.text }}

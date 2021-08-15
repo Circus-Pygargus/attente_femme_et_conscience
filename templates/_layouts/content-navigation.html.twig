@@ -19,7 +19,11 @@
                 </a>
                 {% if category.links is defined %}
                 {% for element in category.links %}
+                    {% if category.urlPathForLinks is defined %}
+                    <a href="{{ path(category.urlPathForLinks, {categorySlug: category.linkAddSlug, elementSlug: element.slug}) }}"
+                    {% else %}
                     <a href="{{ path(category.link, {slug: element.slug}) }}"
+                    {% endif %}
                         class="link
                         {% if content.slug is defined and element.slug == content.slug %}
                              selected
