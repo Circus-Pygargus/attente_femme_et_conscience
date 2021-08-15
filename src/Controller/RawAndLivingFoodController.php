@@ -27,6 +27,7 @@ class RawAndLivingFoodController extends AbstractController
     private array $contentNavigation;
     private array $content;
     private string $heroImgName;
+    private EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -70,7 +71,7 @@ class RawAndLivingFoodController extends AbstractController
     /**
      * @Route("/recettes-{slug}s", name="_category")
      */
-    public function category (
+    public function showRecipesByCategory (
         string $slug,
         Request $request,
         PaginatorInterface $paginator
@@ -108,6 +109,42 @@ class RawAndLivingFoodController extends AbstractController
             $request->query->getInt('page', 1), // Numéro de la page demandée via url, 1 si aucune page
             2 // le nombre de recettes par page
         );
+
+        return $this->render('blog-content/index.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navbarInfos' => $this->navbarInfos,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'content' => $this->content
+        ]);
+    }
+
+    /**
+     * @Route("/recettes-{categorySlug}s/{elementSlug}", name="_recipe")
+     */
+    public function showOneRecipe (
+        string $categorySlug,
+        string $elementSlug
+    ): Response
+    {
+        $recipeCategory = $this->em->getRepository(RecipeCategory::class)->findOneBy(['slug' => $categorySlug]);
+        $recipe = $this->em->getRepository(Recipe::class)->findOneBy(['slug' => $elementSlug]);
+
+        $this->navigationInfos[] = [
+            'text' => 'Recettes ' . $recipeCategory->getLabel() . 's',
+            'urlPath' => 'raw_and_living_food_category',
+            'slug' => $categorySlug
+        ];
+        $this->navigationInfos[] = [
+            'text' => $recipe->getSlug(),
+            'urlPath' => 'raw_and_living_food_recipe',
+            'categorySlug' => $categorySlug,
+            'slug' => $elementSlug
+        ];
+
+        $this->contentNavigation = $this->getRecipesAndRelatedLinks($this->em);
+        $this->contentNavigation['inUseRegex'] = 'raw_and_living_food';
+        $this->content['element'] = $recipe;
 
         return $this->render('blog-content/index.html.twig', [
             'heroImgName' => $this->heroImgName,
