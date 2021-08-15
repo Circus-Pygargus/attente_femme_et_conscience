@@ -163,7 +163,7 @@ class ArticleController extends AbstractController
 //“Femmes, soyez le changement que vous voulez voir dans ce monde !”</p><p>La Bienveillance comment d’abord par nous-même.
 //Et elle est aussi à l’égard des autres Femmes. </p>'
 //        ];
-        $content = $articleRepository->findOneBy(['slug' => $slug]);
+        $content['element'] = $articleRepository->findOneBy(['slug' => $slug]);
 //dd($content);
 
         return $this->render('blog-content/index.html.twig', [
