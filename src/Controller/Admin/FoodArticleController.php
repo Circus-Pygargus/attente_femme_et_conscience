@@ -1,0 +1,68 @@
+<?php
+
+namespace App\Controller\Admin;
+
+use App\Controller\Admin\AdminController;
+use App\Entity\FoodArticle;
+use App\Form\FoodArticle\AddFoodArticleFormType;
+use App\Repository\FoodArticleRepository;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * class FoodArticleController
+ * @package App\Controller\Admin
+ * @Route("/gestion/food-articles", name="admin_food_articles_")
+ */
+class FoodArticleController extends AdminController
+{
+    /**
+     * @Route("/", name="list")
+     */
+    public function list ()
+    {
+        return new Response();
+    }
+
+    /**
+     * @Route("/nouveau", name="create")
+     */
+    public function create (Request $request): Response
+    {
+        $this->navigationInfos[] = [
+            'text' => 'Gérer les articles liés à la nourriture',
+            'urlPath' => 'admin_food_articles_list'
+        ];
+        $this->navigationInfos[] = [
+            'text' => 'Créer un article lié à la nourriture',
+            'urlPath' => 'admin_food_articles_create'
+        ];
+        $this->contentNavigation['inUseRegex'] = 'admin_food_articles';
+
+        $foodArticle = new FoodArticle();
+
+        $form = $this->createForm(AddFoodArticleFormType::class, $foodArticle);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $foodArticle->setUser($this->getUser());
+            $foodArticle->setPublished(false);
+
+            $doctrine = $this->getDoctrine()->getManager();
+            $doctrine->persist($foodArticle);
+            $doctrine->flush();
+
+            return $this->redirectToRoute('admin_food_articles_list');
+        }
+
+        return $this->render('admin/food-article/create.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'foodArticleForm' => $form->createView()
+        ]);
+    }
+}
