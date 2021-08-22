@@ -1,0 +1,54 @@
+{{ form_start(foodArticleForm, {
+    'attr': {
+        'novalidate': 'novalidate',
+        'class': 'form wysiwyg-form'
+    }
+}) }}
+<div class="error">
+    {{ form_errors(foodArticleForm) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(foodArticleForm.title) }}
+    <div class="error">
+        {{ form_errors(foodArticleForm.title) }}
+    </div>
+    {{ form_widget(foodArticleForm.title) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(foodArticleForm.imageFile) }}
+    <div class="error">
+        {{ form_errors(foodArticleForm.imageFile) }}
+    </div>
+    {{ form_widget(foodArticleForm.imageFile) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(foodArticleForm.featuredImageAlt) }}
+    <div class="error">
+        {{ form_errors(foodArticleForm.featuredImageAlt) }}
+    </div>
+    {{ form_widget(foodArticleForm.featuredImageAlt) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(foodArticleForm.keyWordsString) }}
+    <div class="error">
+        {{ form_errors(foodArticleForm.keyWordsString) }}
+    </div>
+    {{ form_widget(foodArticleForm.keyWordsString) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(foodArticleForm.content) }}
+    <div class="error">
+        {{ form_errors(foodArticleForm.content) }}
+    </div>
+    {{ form_widget(foodArticleForm.content) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_row(foodArticleForm.submit) }}
+</div>
+{{ form_end(foodArticleForm) }}
