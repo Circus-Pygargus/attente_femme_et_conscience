@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AdminController;
 use App\Entity\FoodArticle;
 use App\Form\FoodArticle\AddFoodArticleFormType;
+use App\Form\FoodArticle\PublishFoodArticleFormType;
 use App\Repository\FoodArticleRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,9 +22,57 @@ class FoodArticleController extends AdminController
     /**
      * @Route("/", name="list")
      */
-    public function list ()
+    public function list (
+        Request $request,
+        FoodArticleRepository $foodArticleRepository,
+        PaginatorInterface $paginator
+    )
     {
-        return new Response();
+        $this->navigationInfos[] = [
+            'text' => 'Gérer les articles liés à la nourriture',
+            'urlPath' => 'admin_food_articles_list'
+        ];
+
+        // Pour les formulaires de publication ou de suppression d'article
+        // un seul formulaire de chaque, géré en js
+        $message = '';
+        $foodArticle = new FoodArticle();
+        $publishForm = $this->createForm(PublishFoodArticleFormType::class, $foodArticle);
+
+        $publishForm->handleRequest($request);
+
+        if ($publishForm->isSubmitted() && $publishForm->isValid()) {
+            $newInfos = $publishForm->getData();
+            $foodArticle = $foodArticleRepository->findOneBy(['slug' => $newInfos->getSlug()]);
+            $foodArticle->setPublished($newInfos->getPublished());
+            $doctrine = $this->getDoctrine()->getManager();
+            $doctrine->persist($foodArticle);
+            $doctrine->flush();
+
+            if ($foodArticle->getPublished()) {
+                $message = 'L\'article <b>' . $foodArticle->getTitle() . '</b> est maintenant publié.';
+            } else {
+                $message = 'L\'article <b>' . $foodArticle->getTitle() . '</b> n\'est plus publié.';
+            }
+        }
+
+        // Pour la liste des articles
+        $foodArticlesData = $foodArticleRepository->getFoodArticlesAdminList();
+
+        $foodArticles = $paginator->paginate(
+            $foodArticlesData, // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page demandée via url, 1 si aucune page
+            2 // le nombre d'articles par page
+        );
+
+        return $this->render('admin/food-article/list.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'foodArticlePublishForm' => $publishForm->createView(),
+            'lastFoodArticleMessage' => $message,
+            'foodArticles' => $foodArticles
+        ]);
     }
 
     /**
