@@ -34,7 +34,7 @@
         {% for article in foodArticles %}
             <tr class="element">
                 <td class="element-title">
-                    <a href="{{ path('admin_articles_edit', {
+                    <a href="{{ path('admin_food_articles_edit', {
                         slug: article.slug
                     }) }}">
                         {{ article.title }}
