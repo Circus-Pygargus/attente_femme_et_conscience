@@ -203,4 +203,35 @@ class RawAndLivingFoodController extends AbstractController
             'content' => $this->content
         ]);
     }
+
+    /**
+     * @Route("/articles/{slug}", name="_article")
+     */
+    public function ShowOneFoodArticle ($slug): Response
+    {
+        $foodArticle = $this->em->getRepository(FoodArticle::class)->findOneBy(['slug' => $slug]);
+
+        $this->navigationInfos[] = [
+            'text' => 'Articles liés à l\'alimentation',
+            'urlPath' => 'raw_and_living_food_articles',
+        ];
+        $this->navigationInfos[] = [
+            'text' => $foodArticle->getTitle(),
+            'urlPath' => 'raw_and_living_food_article',
+            'slug' => $slug
+        ];
+
+        $this->contentNavigation = $this->getRecipesAndRelatedLinks($this->em);
+        $this->contentNavigation['inUseRegex'] = 'raw_and_living_food';
+        $this->content['page'] = 'Graines';
+        $this->content['element'] = $foodArticle;
+
+        return $this->render('blog-content/index.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navbarInfos' => $this->navbarInfos,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'content' => $this->content
+        ]);
+    }
 }
