@@ -63,4 +63,20 @@ class FoodArticleRepository extends ServiceEntityRepository
 
         return $query->execute();
     }
+
+    /**
+     * Retourne une liste d'infos concernant les articles liés à la nourriture pour les utilisateurs
+     * (slug, titre, image, extrait)
+     */
+    public function getArticlesList (): array
+    {
+        $dql = $this->createQueryBuilder('f')
+            ->select('f.slug, f.title')
+            ->where('f.published = 1')
+            ->orderBy('f.createdAt', 'DESC');
+
+        $query = $dql->getQuery();
+
+        return $query->execute();
+    }
 }
