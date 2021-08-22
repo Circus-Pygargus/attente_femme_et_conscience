@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AdminController;
 use App\Entity\Article;
 use App\Entity\FoodArticle;
-use App\Form\Article\EditFoodArticleFormType;
+use App\Form\FoodArticle\EditFoodArticleFormType;
 use App\Form\FoodArticle\AddFoodArticleFormType;
 use App\Form\FoodArticle\PublishFoodArticleFormType;
 use App\Repository\FoodArticleRepository;

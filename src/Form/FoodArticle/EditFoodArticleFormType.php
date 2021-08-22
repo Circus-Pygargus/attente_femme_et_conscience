@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\Article;
+namespace App\Form\FoodArticle;
 
 use App\Entity\FoodArticle;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
