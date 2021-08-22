@@ -42,6 +42,10 @@ Trait RecipeTrait
                 'links' => $sweetyRecipes
             ];
         }
+        $categories[] = [
+            'name' => 'Graines',
+            'link' => 'raw_and_living_food_articles'
+        ];
 
         return [
             'title' => $title,
