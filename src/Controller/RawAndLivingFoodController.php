@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\FoodArticle;
 use App\Entity\Recipe;
 use App\Entity\RecipeCategory;
 use App\Repository\Traits\RecipeTrait;
@@ -145,6 +146,54 @@ class RawAndLivingFoodController extends AbstractController
         $this->contentNavigation = $this->getRecipesAndRelatedLinks($this->em);
         $this->contentNavigation['inUseRegex'] = 'raw_and_living_food';
         $this->content['element'] = $recipe;
+
+        return $this->render('blog-content/index.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navbarInfos' => $this->navbarInfos,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'content' => $this->content
+        ]);
+    }
+
+    /**
+     * @Route("/articles", name="_articles")
+     */
+    public function showFoodArticles (
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response
+    {
+
+        $this->navigationInfos[] = [
+            'text' => 'Articles liés à l\'alimentation',
+            'urlPath' => 'raw_and_living_food_articles',
+        ];
+        $this->contentNavigation = $this->getRecipesAndRelatedLinks($this->em);
+        $this->contentNavigation['inUseRegex'] = 'raw_and_living_food';
+        $this->content = [
+            'page' => 'Graines',
+            'noContentMsg' => 'Pas d\articles liés à l\'alimentations pour le moment.',
+            'subLayout' => 'food-article.html.twig'
+        ];
+
+        $foodArticlesData = $this->em
+            ->getRepository(FoodArticle::class)
+            ->findBy([
+                'published' => true
+            ],
+            [
+                'createdAt' => 'DESC'
+            ],
+            10, // limit
+            0 // offset
+        );
+
+        $this->content['list'] = $paginator->paginate(
+            $foodArticlesData, // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page demandée via url, 1 si aucune page
+            2 // le nombre de recettes par page
+        );
 
         return $this->render('blog-content/index.html.twig', [
             'heroImgName' => $this->heroImgName,
