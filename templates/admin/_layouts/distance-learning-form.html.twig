@@ -1,0 +1,54 @@
+{{ form_start(distanceLearningForm, {
+    'attr': {
+        'novalidate': 'novalidate',
+        'class': 'form wysiwyg-form'
+    }
+}) }}
+<div class="error">
+    {{ form_errors(distanceLearningForm) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(distanceLearningForm.title) }}
+    <div class="error">
+        {{ form_errors(distanceLearningForm.title) }}
+    </div>
+    {{ form_widget(distanceLearningForm.title) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(distanceLearningForm.imageFile) }}
+    <div class="error">
+        {{ form_errors(distanceLearningForm.imageFile) }}
+    </div>
+    {{ form_widget(distanceLearningForm.imageFile) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(distanceLearningForm.featuredImageAlt) }}
+    <div class="error">
+        {{ form_errors(distanceLearningForm.featuredImageAlt) }}
+    </div>
+    {{ form_widget(distanceLearningForm.featuredImageAlt) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(distanceLearningForm.keyWordsString) }}
+    <div class="error">
+        {{ form_errors(distanceLearningForm.keyWordsString) }}
+    </div>
+    {{ form_widget(distanceLearningForm.keyWordsString) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(distanceLearningForm.content) }}
+    <div class="error">
+        {{ form_errors(distanceLearningForm.content) }}
+    </div>
+    {{ form_widget(distanceLearningForm.content) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_row(distanceLearningForm.submit) }}
+</div>
+{{ form_end(distanceLearningForm) }}
