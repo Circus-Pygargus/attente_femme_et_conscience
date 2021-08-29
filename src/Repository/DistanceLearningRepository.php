@@ -47,4 +47,19 @@ class DistanceLearningRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * Retourne une liste d'infos concernant les formations à distance pour les admins
+     * (slug, title, published)
+     */
+    public function getDistanceLearningsAdminList (): array
+    {
+        $dql = $this->createQueryBuilder('d')
+            ->select('d.slug, d.title, d.published')
+            ->addOrderBy('d.createdAt', 'DESC');
+
+        $query = $dql->getQuery();
+
+        return $query->execute();
+    }
 }

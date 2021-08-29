@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AdminController;
 use App\Entity\DistanceLearning;
 use App\Form\DistanceLearning\AddDistanceLearningFormType;
+use App\Form\DistanceLearning\PublishDistanceLearningFormType;
+use App\Repository\DistanceLearningRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,9 +29,57 @@ class DistanceLearningController extends AdminController
     /**
      * @Route("/", name="list")
      */
-    public function list (): Response
+    public function list (
+        Request $request,
+        DistanceLearningRepository $distanceLearningRepository,
+        PaginatorInterface $paginator
+    ): Response
     {
-        return new Response();
+        $this->navigationInfos[] = [
+            'text' => 'Gérer les formations à distance',
+            'urlPath' => 'admin_distance_learnings_list'
+        ];
+
+        // Pour les formulaires de publication ou de suppression de recette
+        // un seul formulaire de chaque, géré en js
+        $message = '';
+        $distanceLearning = new DistanceLearning();
+        $publishForm = $this->createForm(PublishDistanceLearningFormType::class, $distanceLearning);
+
+        $publishForm->handleRequest($request);
+
+        if ($publishForm->isSubmitted() && $publishForm->isValid()) {
+            $newInfosDistanceLearning = $publishForm->getData();
+            $distanceLearning = $distanceLearningRepository->findOneBy(['slug' => $newInfosDistanceLearning->getSlug()]);
+            $distanceLearning->setPublished($newInfosDistanceLearning->getPublished());
+            $doctrine = $this->getDoctrine()->getManager();
+            $doctrine->persist($distanceLearning);
+            $doctrine->flush();
+
+            if ($distanceLearning->getPublished()) {
+                $message = 'La formation à distance <b>' . $distanceLearning->getTitle() . '</b> est maintenant publiée.';
+            } else {
+                $message = 'La formation à distance <b>' . $distanceLearning->getTitle() . '</b> n\'est plus publiée.';
+            }
+        }
+
+        // Pour la liste des recettes
+        $distanceLearningData = $distanceLearningRepository->getDistanceLearningsAdminList();
+
+        $distanceLearnings = $paginator->paginate(
+            $distanceLearningData, // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page demandée via url, 1 si aucune page
+            2 // le nombre d'articles par page
+        );
+
+        return $this->render('admin/distance-learning/list.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'distanceLearningPublishForm' => $publishForm->createView(),
+            'lastDistanceLearningMessage' => $message,
+            'distanceLearnings' => $distanceLearnings
+        ]);
     }
 
     /**
@@ -67,5 +117,13 @@ class DistanceLearningController extends AdminController
             'contentNavigation' => $this->contentNavigation,
             'distanceLearningForm' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/edite/{slug}", name="edit")
+     */
+    public function edit ():Response
+    {
+        return new Response();
     }
 }
