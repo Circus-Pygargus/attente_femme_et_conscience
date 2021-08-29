@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AdminController;
 use App\Entity\DistanceLearning;
 use App\Form\DistanceLearning\AddDistanceLearningFormType;
+use App\Form\DistanceLearning\EditDistanceLearningFormType;
 use App\Form\DistanceLearning\PublishDistanceLearningFormType;
 use App\Repository\DistanceLearningRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -88,11 +89,11 @@ class DistanceLearningController extends AdminController
     public function create (Request $request): Response
     {
         $this->navigationInfos[] = [
-            'text' => 'Gérer les recettes',
+            'text' => 'Gérer les formations à distance',
             'urlPath' => 'admin_distance_learnings_list'
         ];
         $this->navigationInfos[] = [
-            'text' => 'Créer une recette',
+            'text' => 'Créer une formation à distance',
             'urlPath' => 'admin_distance_learnings_create'
         ];
 
@@ -122,8 +123,45 @@ class DistanceLearningController extends AdminController
     /**
      * @Route("/edite/{slug}", name="edit")
      */
-    public function edit ():Response
+    public function edit (
+        string $slug = '',
+        Request $request,
+        DistanceLearningRepository $distanceLearningRepository
+    ):Response
     {
-        return new Response();
+        $this->navigationInfos[] = [
+            'text' => 'Gérer les formations à distance',
+            'urlPath' => 'admin_distance_learnings_list'
+        ];
+        $this->navigationInfos[] = [
+            'text' => 'Éditer une formation à distance',
+            'urlPath' => 'admin_distance_learnings_edit'
+        ];
+
+        if ($slug != '') {
+            $distanceLearning = $distanceLearningRepository->findOneBy(['slug' => $slug]);
+        } else {
+            dd('Etrange');
+            $distanceLearning = new DistanceLearning();
+        }
+
+        $form = $this->createForm(EditDistanceLearningFormType::class, $distanceLearning);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($distanceLearning);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_distance_learnings_list');
+        }
+
+        return $this->render('admin/distance-learning/edit.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'distanceLearningForm' => $form->createView()
+        ]);
     }
 }

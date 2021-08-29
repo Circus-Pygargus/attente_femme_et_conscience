@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class AddDistanceLearningFormType extends AbstractType
+class EditDistanceLearningFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -39,9 +39,9 @@ class AddDistanceLearningFormType extends AbstractType
                         ],
                         'mimeTypesMessage' => 'Merci de choisir un fichier de type image',
                     ]),
-                    new NotNull([
-                        'message' => 'Merci d\'ajouter une image de mise en avant',
-                    ])
+//                    new NotNull([
+//                        'message' => 'Merci d\'ajouter une image de mise en avant',
+//                    ])
                 ]
             ])
             ->add('featuredImageAlt', TextType::class, [
