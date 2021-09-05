@@ -24,7 +24,7 @@ class AddPresentialAccompanimentFormType extends AbstractType
                 'label' => 'Nom',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Merci \'entrer un nom pour cet accompagnement en présentiel'
+                        'message' => 'Merci d\'entrer un nom pour cet accompagnement en présentiel'
                     ])
                 ]
             ])
@@ -54,7 +54,8 @@ class AddPresentialAccompanimentFormType extends AbstractType
                 ]
             ])
             ->add('totalPlacesNb', IntegerType::class, [
-                'label' => 'Nombre de places disponibles (au total)'
+                'label' => 'Nombre de places disponibles (au total)',
+                'invalid_message' => 'Merci d\'entrer un nombre'
             ])
             ->add('keyWordsString', TextType::class, [
                 'label' => 'Mots clés',

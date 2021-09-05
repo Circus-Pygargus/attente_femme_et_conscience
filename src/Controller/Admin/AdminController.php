@@ -39,6 +39,10 @@ class AdminController extends AbstractController
                     'urlPath' => 'admin'
                 ],
                 [
+                    'label' => 'Accompagnement en présentiel',
+                    'urlPath' => 'admin_presential_accompaniments_list'
+                ],
+                [
                     'label' => 'Formations à distance',
                     'urlPath' => 'admin_distance_learnings_list'
                 ],
