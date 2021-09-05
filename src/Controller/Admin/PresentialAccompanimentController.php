@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\PresentialAccompaniment;
 use App\Form\PresentialAccompaniment\AddPresentialAccompanimentFormType;
+use App\Form\PresentialAccompaniment\EditPresentialAccompanimentFormType;
 use App\Form\PresentialAccompaniment\PublishPresentialAccompanimentFormType;
 use App\Repository\PresentialAccompanimentRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -120,8 +121,41 @@ class PresentialAccompanimentController extends AdminController
     /**
      * @Route("/edite/{slug}", name="edit")
      */
-    public function edit ():Response
+    public function edit (
+        string $slug = '',
+        Request $request,
+        PresentialAccompanimentRepository $presentialAccompanimentRepository
+    ):Response
     {
-        return new Response();
+        $this->navigationInfos[] = [
+            'text' => 'Éditer un accompagnement en présentiel',
+            'urlPath' => 'admin_presential_accompaniments_edit'
+        ];
+
+        if ($slug != '') {
+            $presentialAccompaniment = $presentialAccompanimentRepository->findOneBy(['slug' => $slug]);
+        } else {
+            dd('Etrange');
+            $presentialAccompaniment = new PresentialAccompaniment();
+        }
+
+        $form = $this->createForm(EditPresentialAccompanimentFormType::class, $presentialAccompaniment);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($presentialAccompaniment);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_presential_accompaniments_list');
+        }
+
+        return $this->render('admin/presential-accompaniment/edit.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'presentialAccompanimentForm' => $form->createView()
+        ]);
     }
 }

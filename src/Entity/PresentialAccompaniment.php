@@ -111,7 +111,7 @@ class PresentialAccompaniment
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -123,7 +123,7 @@ class PresentialAccompaniment
         return $this->featuredImage;
     }
 
-    public function setFeaturedImage(string $featuredImage): self
+    public function setFeaturedImage(?string $featuredImage): self
     {
         $this->featuredImage = $featuredImage;
 
@@ -149,7 +149,7 @@ class PresentialAccompaniment
         return $this->featuredImageAlt;
     }
 
-    public function setFeaturedImageAlt(string $featuredImageAlt): self
+    public function setFeaturedImageAlt(?string $featuredImageAlt): self
     {
         $this->featuredImageAlt = $featuredImageAlt;
 
@@ -185,7 +185,7 @@ class PresentialAccompaniment
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(?string $content): self
     {
         $this->content = $content;
 
@@ -233,7 +233,7 @@ class PresentialAccompaniment
         return $this->keyWordsString;
     }
 
-    public function setKeyWordsString(string $keyWordsString): self
+    public function setKeyWordsString(?string $keyWordsString): self
     {
         $this->keyWordsString = $keyWordsString;
 
