@@ -47,4 +47,19 @@ class PresentialAccompanimentRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * Retourne une liste d'infos concernant les accompagnements en présentiel pour les admins
+     * (slug, title, published)
+     */
+    public function getPresentialAccompanimentsAdminList (): array
+    {
+        $dql = $this->createQueryBuilder('d')
+            ->select('d.slug, d.title, d.published')
+            ->addOrderBy('d.createdAt', 'DESC');
+
+        $query = $dql->getQuery();
+
+        return $query->execute();
+    }
 }
