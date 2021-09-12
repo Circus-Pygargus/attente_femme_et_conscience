@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AdminController;
 use App\Entity\Product;
 use App\Form\Product\AddProductFormType;
+use App\Form\Product\EditProductFormType;
 use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -94,8 +95,41 @@ class ProductController extends AdminController
     /**
      * @Route("/edite/{slug}", name="edit")
      */
-    public function edit (string $slug): Response
+    public function edit (
+        string $slug = '',
+        Request $request,
+        ProductRepository $productRepository
+    ): Response
     {
-        return new Response();
+        $this->navigationInfos[] = [
+            'text' => 'Éditer un produit',
+            'urlPath' => 'admin_products_edit'
+        ];
+
+        if ($slug !== '') {
+            $product = $productRepository->findOneBy(['slug' => $slug]);
+        } else {
+            dd('Etrange');
+            $product = new Product();
+        }
+
+        $form = $this->createForm(EditProductFormType::class, $product);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($product);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_products_list');
+        }
+
+        return $this->render('admin/product/edit.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'productForm' => $form->createView()
+        ]);
     }
 }
