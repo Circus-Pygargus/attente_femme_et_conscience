@@ -21,6 +21,17 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class FoodArticleController extends AdminController
 {
+    public function __construct ()
+    {
+        parent::__construct();
+
+        $this->navigationInfos[] = [
+            'text' => 'Gérer les articles liés à la nourriture',
+            'urlPath' => 'admin_food_articles_list'
+        ];
+        $this->contentNavigation['inUseRegex'] = 'admin_food_articles';
+    }
+
     /**
      * @Route("/", name="list")
      */
@@ -30,11 +41,6 @@ class FoodArticleController extends AdminController
         PaginatorInterface $paginator
     )
     {
-        $this->navigationInfos[] = [
-            'text' => 'Gérer les articles liés à la nourriture',
-            'urlPath' => 'admin_food_articles_list'
-        ];
-
         // Pour les formulaires de publication ou de suppression d'article
         // un seul formulaire de chaque, géré en js
         $message = '';
@@ -83,14 +89,9 @@ class FoodArticleController extends AdminController
     public function create (Request $request): Response
     {
         $this->navigationInfos[] = [
-            'text' => 'Gérer les articles liés à la nourriture',
-            'urlPath' => 'admin_food_articles_list'
-        ];
-        $this->navigationInfos[] = [
             'text' => 'Créer un article lié à la nourriture',
             'urlPath' => 'admin_food_articles_create'
         ];
-        $this->contentNavigation['inUseRegex'] = 'admin_food_articles';
 
         $foodArticle = new FoodArticle();
 
@@ -127,14 +128,9 @@ class FoodArticleController extends AdminController
     ): Response
     {
         $this->navigationInfos[] = [
-            'text' => 'Gérer les articles liés à  la nourriture',
-            'urlPath' => 'admin_food_articles_list'
-        ];
-        $this->navigationInfos[] = [
             'text' => 'Éditer un article lié à la nourriture',
             'urlPath' => 'admin_food_articles_edit'
         ];
-        $this->contentNavigation['inUseRegex'] = 'admin_articles';
 
         if ($slug !== '') {
             $foodArticle = $foodArticleRepository->findOneBy(['slug' => $slug]);
