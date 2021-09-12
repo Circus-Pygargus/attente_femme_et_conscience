@@ -36,7 +36,7 @@ class AdminController extends AbstractController
                 ],
                 [
                     'label' => 'Rendez-vous',
-                    'urlPath' => 'admin'
+                    'urlPath' => 'admin_rendez_vous_list'
                 ],
                 [
                     'label' => 'Accompagnements en présentiel',
