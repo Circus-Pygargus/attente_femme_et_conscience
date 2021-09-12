@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Controller\Admin\AdminController;
 use App\Entity\Product;
 use App\Form\Product\AddProductFormType;
+use App\Repository\ProductRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,9 +31,32 @@ class ProductController extends AdminController
     /**
      * @Route("/", name="list")
      */
-    public function list (): Response
+    public function list (
+        Request $request,
+        ProductRepository $productRepository,
+        PaginatorInterface $paginator
+    ): Response
     {
-        return new Response();
+        $this->navigationInfos[] = [
+            'text' => 'Gérer les produits',
+            'urlPath' => 'admin_products_list'
+        ];
+
+        // Pour la liste des recettes
+        $productsData = $productRepository->getListFormAdmin();
+
+        $products = $paginator->paginate(
+            $productsData, // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page demandée via url, 1 si aucune page
+            2 // le nombre d'articles par page
+        );
+
+        return $this->render('admin/product/list.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'products' => $products
+        ]);
     }
 
     /**
@@ -65,5 +89,13 @@ class ProductController extends AdminController
             'contentNavigation' => $this->contentNavigation,
             'productForm' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/edite/{slug}", name="edit")
+     */
+    public function edit (string $slug): Response
+    {
+        return new Response();
     }
 }

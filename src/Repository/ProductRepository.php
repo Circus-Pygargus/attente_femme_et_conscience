@@ -47,4 +47,15 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getListFormAdmin (): array
+    {
+        $sql = $this->createQueryBuilder('p')
+            ->select('p.slug, p.title')
+            ->addOrderBy('p.createdAt', 'DESC');
+
+        $query = $sql->getQuery();
+
+            return $query->execute();
+    }
 }
