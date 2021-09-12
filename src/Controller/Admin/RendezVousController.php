@@ -16,9 +16,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class RendezVousController extends AdminController
 {
-    public function __contruct ()
+    public function __construct ()
     {
-        parent::__Construct();
+        parent::__construct();
 
         $this->contentNavigation['inUseRegex'] = 'admin_rendez_vous';
         $this->navigationInfos[] = [
