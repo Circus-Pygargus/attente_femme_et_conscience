@@ -47,4 +47,19 @@ class RendezVousRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * Retourne une liste d'infos concernant les accompagnements en présentiel pour les admins
+     * (slug, title, published)
+     */
+    public function getRendezVousListForAdmin (): array
+    {
+        $dql = $this->createQueryBuilder('r')
+            ->select('r.slug, r.title, r.published')
+            ->addOrderBy('r.createdAt', 'DESC');
+
+        $query = $dql->getQuery();
+
+        return $query->execute();
+    }
 }
