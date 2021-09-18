@@ -60,7 +60,7 @@ class AdminController extends AbstractController
                 ],
                 [
                     'label' => 'Lettres d\'informations',
-                    'urlPath' => 'admin'
+                    'urlPath' => 'admin_newsletters_list'
                 ],
                 [
                     'label' => 'Corbeille',
