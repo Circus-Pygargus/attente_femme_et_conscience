@@ -49,6 +49,8 @@ class NewsletterController extends AdminController
             $em = $this->getDoctrine()->getManager();
             $em->persist($newsletter);
             $em->flush();
+
+            return $this->redirectToRoute('admin_newsletters_list');
         }
 
         return $this->render('admin/newsletter/create.html.twig', [
