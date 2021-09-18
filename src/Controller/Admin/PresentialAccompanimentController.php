@@ -38,11 +38,6 @@ class PresentialAccompanimentController extends AdminController
         PaginatorInterface $paginator
     ): Response
     {
-        $this->navigationInfos[] = [
-            'text' => 'Gérer les accompagnements en présentiel',
-            'urlPath' => 'admin_presential_accompaniments_list'
-        ];
-
         // Pour les formulaires de publication ou de suppression de recette
         // un seul formulaire de chaque, géré en js
         $message = '';

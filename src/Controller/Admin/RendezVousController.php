@@ -39,11 +39,6 @@ class RendezVousController extends AdminController
         PaginatorInterface $paginator
     ): Response
     {
-        $this->navigationInfos[] = [
-            'text' => 'Gérer les rendez-vous',
-            'urlPath' => 'admin_rendez_vous_list'
-        ];
-
         // Pour les formulaires de publication ou de suppression de recette
         // un seul formulaire de chaque, géré en js
         $message = '';
