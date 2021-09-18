@@ -19,6 +19,7 @@ class Newsletter
     private $id;
 
     /**
+     * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(type="string", length=128)
      */
     private $slug;
