@@ -123,6 +123,14 @@
           &-delete {
             text-align: center;
           }
+
+          &-isSent {
+            text-align: right;
+
+            &--false {
+              padding-right: 1rem;
+            }
+          }
         }
       }
     }

@@ -47,4 +47,19 @@ class NewsletterRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    /**
+     * Retourne une liste d'infos concernant les newsletters pour admin
+     * (slug, title, isSent)
+     */
+    public function getNewslettersListForAdmin (): array
+    {
+        $dql = $this->createQueryBuilder('n')
+            ->select('n.slug, n.title, n.isSent')
+            ->addOrderBy('n.createdAt', 'DESC');
+
+        $query = $dql->getQuery();
+
+        return $query->execute();
+    }
 }
