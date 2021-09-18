@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\RendezVous;
 use App\Form\RendezVous\AddRendezVousFormType;
+use App\Form\RendezVous\EditRendezVousFormType;
 use App\Form\RendezVous\PublishRendezVousFormType;
 use App\Repository\RendezVousRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -121,8 +122,42 @@ class RendezVousController extends AdminController
     /**
      * @Route("/edite/{slug}", name="edit")
      */
-    public function edit (string $slug): Response
+    public function edit (
+        string $slug,
+        Request $request,
+        RendezVousRepository $rendezVousRepository
+    ): Response
     {
-        return new Response();
+        $this->navigationInfos[] = [
+            'text' => 'Éditer un rendez-vous',
+            'urlPath' => 'admin_rendez_vous_edit',
+            'slug' => $slug
+        ];
+
+        if ($slug !== '') {
+            $rendezVous = $rendezVousRepository->findOneBy(['slug' => $slug]);
+        } else {
+            dd('étrange');
+            $rendezVous = new RendezVous();
+        }
+
+        $form = $this->createForm(EditRendezVousFormType::class, $rendezVous);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($rendezVous);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_rendez_vous_list');
+        }
+
+        return $this->render('admin/rendez-vous/edit.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'rendezVousForm' => $form->createView()
+        ]);
     }
 }
