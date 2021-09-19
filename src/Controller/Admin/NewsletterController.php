@@ -107,8 +107,42 @@ class NewsletterController extends AdminController
     /**
      * @Route("/edite/{slug}", name="edit")
      */
-    public function edit (string $slug): Response
+    public function edit (
+        string $slug,
+        Request $request,
+        NewsletterRepository $newsletterRepository
+    ): Response
     {
-        return new Response();
+        $this->navigationInfos[] = [
+            'text' => 'Éditer une newsletter',
+            'urlPath' => 'admin_newsletters_edit',
+            'slug' => $slug
+        ];
+
+        if ($slug !== '') {
+            $newsletter = $newsletterRepository->findOneBy(['slug' => $slug]);
+        } else {
+            dd('étrange');
+            $newsletter = new Newsletter();
+        }
+
+        $form = $this->createForm(AddNewsletterFormType::class, $newsletter);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newsletter);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_newsletters_list');
+        }
+
+        return $this->render('admin/newsletter/edit.html.twig', [
+            'heroImgName' => $this->heroImgName,
+            'navigationInfos' => $this->navigationInfos,
+            'contentNavigation' => $this->contentNavigation,
+            'newsletterForm' => $form->createView()
+        ]);
     }
 }
