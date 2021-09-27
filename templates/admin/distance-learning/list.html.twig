@@ -1,0 +1,63 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app_admin_publish') }}
+{% endblock %}
+
+{% block adminContent %}
+    <h2 class="title">Gérer les formations à distance</h2>
+
+    <div><a href="{{ path('admin_distance_learnings_create') }}" class="btn btn-inverted">Créer</a></div>
+
+    <div style="display:none">
+        {{ form_start(distanceLearningPublishForm) }}
+        {{ form_widget(distanceLearningPublishForm.slug) }}
+        {{ form_widget(distanceLearningPublishForm.published) }}
+        {{ form_end(distanceLearningPublishForm) }}
+    </div>
+
+    {% if lastDistanceLearningMessage is defined %}
+        <p class="article-published">{{ lastDistanceLearningMessage|raw }}</p>
+    {% endif %}
+
+    {%  if distanceLearnings|length > 0 %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="modify">Modifier</th>
+                <th>Publier</th>
+                <th>Supprimer</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for distanceLearning in distanceLearnings %}
+                <tr class="element">
+                    <td class="element-title">
+                        <a
+                                href="{{ path('admin_distance_learnings_edit', {
+                                    slug: distanceLearning.slug
+                                }) }}"
+                        >
+                            {{ distanceLearning.title }}
+                        </a>
+                    </td>
+                    <td>
+                        <div
+                                class="element-published"
+                                data-published="{% if distanceLearning.published %}1{% else %}0{% endif %}"
+                                data-slug="{{ distanceLearning.slug }}"
+                        ></div>
+                    </td>
+                    <td class="element-delete">
+                        <a href="#">X</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {{ knp_pagination_render(distanceLearnings) }}
+    {% else %}
+        <p class="empty-array">Il n'y a aucune formation à distance enregistrée.</p>
+    {% endif %}
+{% endblock %}

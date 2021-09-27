@@ -1,0 +1,15 @@
+<div class="recipe">
+{#    <div class="recipe__img" style="background-image: url({{ asset('build/img/' ~ element.featuredImage) }})"></div>#}
+
+    <img
+            src="{{ vich_uploader_asset(element, 'imageFile')|imagine_filter('recipe_featured') }}"
+            alt="{{ element.featuredImageAlt }}"
+            class="recipe--img"
+    >
+    <div class="recipe__texts">
+        <h3 class="recipe__texts-title">{{ element.title }}</h3>
+        <p class="recipe--excerpt">{{ element.content|striptags|raw > 350 ? element.content|striptags|raw|slice(0, 351)|split(' ')|slice(0, -1)|join(' ') ~ '…' : element.content|striptags|raw }}</p>
+
+        <div><a href="{{ path('raw_and_living_food_article', {slug: element.slug}) }}" class="btn btn-light">En savoir +</a></div>
+    </div>
+</div>

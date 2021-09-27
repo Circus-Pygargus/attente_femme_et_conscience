@@ -28,9 +28,14 @@ Encore
     .addStyleEntry('css/blog-content', './assets/styles/style-blog-content.scss')
     .addStyleEntry('css/error-page', './assets/styles/style-error-page.scss')
     .addStyleEntry('css/admin', './assets/styles/style-admin.scss')
+    .addStyleEntry('css/login', './assets/styles/style-login.scss')
+    .addStyleEntry('css/account', './assets/styles/style-account.scss')
 
     .addEntry('app', './assets/app.js')
-    .addEntry('app-home', './assets/app-home.js')
+    .addEntry('app_home', './assets/app-home.js')
+    .addEntry('app-admin', './assets/app-admin.js')
+    .addEntry('app_admin_publish', './assets/admin_publish.js')
+    .addEntry('app_admin_send_newsletter', './assets/admin-send-newsletter.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -85,7 +90,8 @@ Encore
     .addPlugin(
         new CopyPlugin({
             patterns: [
-                { from: './assets/img', to: 'img' }
+                { from: './assets/img', to: 'img' },
+                { from: './assets/bundles', to: 'bundles' }
             ]
         }),
     )

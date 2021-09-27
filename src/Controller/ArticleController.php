@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\ArticleRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,7 +21,11 @@ class ArticleController extends AbstractController
     /**
      * @Route("/", name="list")
      */
-    public function list (): Response
+    public function list (
+        Request $request,
+        ArticleRepository $articleRepository,
+        PaginatorInterface $paginator
+    ): Response
     {
         $navbarInfos = [
             'page' => 'articles'
@@ -36,36 +43,50 @@ class ArticleController extends AbstractController
         $contentNavigation = [
             'title' => 'Articles',
             'subLink' => 'articles_show_one',
-            'links' => [
-                [
-                    'slug' => '1',
-                    'title' => 'Reprenons notre pouvoir'
-                ],
-                [
-                    'slug' => '2',
-                    'title' => 'article 2'
-                ],
-                [
-                    'slug' => '3',
-                    'title' => 'article 3'
-                ],
-                [
-                    'slug' => '4',
-                    'title' => 'article 4'
-                ]
-            ]
+//            'links' => [
+//                [
+//                    'slug' => '1',
+//                    'title' => 'Reprenons notre pouvoir'
+//                ],
+//                [
+//                    'slug' => '2',
+//                    'title' => 'article 2'
+//                ],
+//                [
+//                    'slug' => '3',
+//                    'title' => 'article 3'
+//                ],
+//                [
+//                    'slug' => '4',
+//                    'title' => 'article 4'
+//                ]
+//            ]
         ];
+        $contentNavigation['links'] = $articleRepository->getArticlesNavigationList();
+
         $content = [
+            'page' => 'Les articles',
+            'noContentMsg' => 'Pas d\'article publié pour le moment.',
             'subLayout' => 'article.html.twig',
-            'list' => [
-                0 => [
-                    'title' => 'Reprenons notre pouvoir'
-                ],
-                1 => [
-                    'title' => 'Article 2'
-                ]
-            ]
+//            'list' => [
+//                0 => [
+//                    'title' => 'Reprenons notre pouvoir'
+//                ],
+//                1 => [
+//                    'title' => 'Article 2'
+//                ]
+//            ]
         ];
+
+        $articlesData = $articleRepository->getArticlesList();
+
+        $content['list'] = $paginator->paginate(
+            $articlesData, // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page demandée via url, 1 si aucune page
+            2 // le nombre d'articles par page
+        );
+
+
 
         return $this->render('blog-content/index.html.twig', [
             'heroImgName' => $this->heroImgName,
@@ -79,7 +100,10 @@ class ArticleController extends AbstractController
     /**
      * @Route("/{slug}", name="show_one")
      */
-    public function showOne ($slug): Response
+    public function showOne (
+        string $slug,
+        ArticleRepository $articleRepository
+    ): Response
     {
         $navbarInfos = [
             'page' => 'articles'
@@ -102,38 +126,45 @@ class ArticleController extends AbstractController
         $contentNavigation = [
             'title' => 'Articles',
             'subLink' => 'articles_show_one',
-            'links' => [
-                [
-                    'category' => 'articles',
-                    'slug' => '1',
-                    'title' => 'Reprenons notre pouvoir'
-                ],
-                [
-                    'category' => 'articles',
-                    'slug' => '2',
-                    'title' => 'article 2'
-                ],
-                [
-                    'category' => 'articles',
-                    'slug' => '3',
-                    'title' => 'article 3'
-                ],
-                [
-                    'category' => 'articles',
-                    'slug' => '4',
-                    'title' => 'article 4'
-                ]
-            ]
+//            'links' => [
+//                [
+//                    'category' => 'articles',
+//                    'slug' => '1',
+//                    'title' => 'Reprenons notre pouvoir'
+//                ],
+//                [
+//                    'category' => 'articles',
+//                    'slug' => '2',
+//                    'title' => 'article 2'
+//                ],
+//                [
+//                    'category' => 'articles',
+//                    'slug' => '3',
+//                    'title' => 'article 3'
+//                ],
+//                [
+//                    'category' => 'articles',
+//                    'slug' => '4',
+//                    'title' => 'article 4'
+//                ]
+//            ]
         ];
-        $content = [
-            'slug' => '1',
-            'title' => 'Reprenons notre pouvoir',
-            'text' => '<p>Dans ce que l’on peut voir, entendre ou lire concernant les Femmes
-actuellement, nous avons en tant que Femme notre responsabilité.
-Nous pouvons chacune à notre niveau être actrice du changement.</p><p>Pour paraphraser la citation de Gandhi :
-“Femmes, soyez le changement que vous voulez voir dans ce monde !”</p><p>La Bienveillance comment d’abord par nous-même.
-Et elle est aussi à l’égard des autres Femmes. </p>'
-        ];
+        $contentNavigation['links'] = $articleRepository->getArticlesNavigationList();
+        foreach ($contentNavigation['links'] as $link) {
+            $link['categorie'] = 'article';
+        }
+
+//        $content = [
+//            'slug' => '1',
+//            'title' => 'Reprenons notre pouvoir',
+//            'text' => '<p>Dans ce que l’on peut voir, entendre ou lire concernant les Femmes
+//actuellement, nous avons en tant que Femme notre responsabilité.
+//Nous pouvons chacune à notre niveau être actrice du changement.</p><p>Pour paraphraser la citation de Gandhi :
+//“Femmes, soyez le changement que vous voulez voir dans ce monde !”</p><p>La Bienveillance comment d’abord par nous-même.
+//Et elle est aussi à l’égard des autres Femmes. </p>'
+//        ];
+        $content['element'] = $articleRepository->findOneBy(['slug' => $slug]);
+//dd($content);
 
         return $this->render('blog-content/index.html.twig', [
             'heroImgName' => $this->heroImgName,

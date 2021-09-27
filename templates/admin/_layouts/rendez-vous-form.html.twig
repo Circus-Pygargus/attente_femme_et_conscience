@@ -1,0 +1,70 @@
+{{ form_start(rendezVousForm, {
+    'attr': {
+        'novalidate': 'novalidate',
+        'class': 'form wysiwyg-form'
+    }
+}) }}
+<div class="error">
+    {{ form_errors(rendezVousForm) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(rendezVousForm.title) }}
+    <div class="error">
+        {{ form_errors(rendezVousForm.title) }}
+    </div>
+    {{ form_widget(rendezVousForm.title) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(rendezVousForm.dateAndSchedule) }}
+    <div class="error">
+        {{ form_errors(rendezVousForm.dateAndSchedule) }}
+    </div>
+    {{ form_widget(rendezVousForm.dateAndSchedule) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(rendezVousForm.imageFile) }}
+    <div class="error">
+        {{ form_errors(rendezVousForm.imageFile) }}
+    </div>
+    {{ form_widget(rendezVousForm.imageFile) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(rendezVousForm.featuredImageAlt) }}
+    <div class="error">
+        {{ form_errors(rendezVousForm.featuredImageAlt) }}
+    </div>
+    {{ form_widget(rendezVousForm.featuredImageAlt) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(rendezVousForm.totalPlacesNb) }}
+    <div class="error">
+        {{ form_errors(rendezVousForm.totalPlacesNb) }}
+    </div>
+    {{ form_widget(rendezVousForm.totalPlacesNb) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(rendezVousForm.keyWordsString) }}
+    <div class="error">
+        {{ form_errors(rendezVousForm.keyWordsString) }}
+    </div>
+    {{ form_widget(rendezVousForm.keyWordsString) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(rendezVousForm.content) }}
+    <div class="error">
+        {{ form_errors(rendezVousForm.content) }}
+    </div>
+    {{ form_widget(rendezVousForm.content) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_row(rendezVousForm.submit) }}
+</div>
+{{ form_end(rendezVousForm) }}

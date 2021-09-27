@@ -1,0 +1,62 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block javascripts %}
+{#    {{ parent() }}#}
+    {{ encore_entry_script_tags('app_admin_publish') }}
+{% endblock %}
+
+{% block adminContent %}
+    <h2 class="title">Gérer les articles Liés à la nourriture</h2>
+
+    <div><a href="{{ path('admin_food_articles_create') }}" class="btn btn-inverted">Créer</a></div>
+
+    <div style="display:none">
+        {{ form_start(foodArticlePublishForm) }}
+            {{ form_widget(foodArticlePublishForm.slug) }}
+            {{ form_widget(foodArticlePublishForm.published) }}
+        {{ form_end(foodArticlePublishForm) }}
+    </div>
+
+    {% if lastFoodArticleMessage is defined %}
+        <p class="article-published">{{ lastFoodArticleMessage|raw }}</p>
+    {% endif %}
+
+    {% if foodArticles|length > 0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="modify">Modifier</th>
+                <th>Publier</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for article in foodArticles %}
+            <tr class="element">
+                <td class="element-title">
+                    <a href="{{ path('admin_food_articles_edit', {
+                        slug: article.slug
+                    }) }}">
+                        {{ article.title }}
+                    </a>
+                </td>
+                <td>
+                    <div
+                        class="element-published"
+                        data-published="{% if article.published %}1{% else %}0{% endif %}"
+                        data-slug="{{ article.slug }}"
+                    ></div>
+                </td>
+                <td class="element-delete">
+                    <a href="#">X</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ knp_pagination_render(foodArticles) }}
+    {% else %}
+    <p class="empty-array">Il n'y a aucun article enregistré.</p>
+    {% endif %}
+{% endblock %}

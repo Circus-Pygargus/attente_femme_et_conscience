@@ -1,7 +1,26 @@
 <div class="header">
     <div class="header--top">
         <div>Language : <span>Français</span></div>
-        <a href="#">Connexion</a>
+
+    {% if app.user %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('admin') }}">Gestion</a>
+        {% endif %}
+            <a
+                href="{{ path('account_base') }}"
+                id="connexion"
+                class="connected"
+            >
+                Mon compte
+            </a>
+    {% else %}
+        <a
+            href="{{ path('app_login') }}"
+            id="connexion"
+        >
+            Connexion
+        </a>
+    {% endif %}
     </div>
     <div class="header--middle">
         <img class="header--logo" src="{{ asset('build/img/lotus-flower.svg') }}">

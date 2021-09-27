@@ -1,0 +1,27 @@
+.vich-image {
+  position: relative;
+
+  input[type="file"] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  img {
+    //width: 20rem;
+    height: 20rem;
+    //width: auto;
+    //max-width: 20rem;
+    //max-height: 20rem;
+  }
+}
+
+label.cloned {
+  display: block;
+  max-width: max-content;
+}
+
+.vich-image-label {
+  display: inline-block;
+  font-size: 2rem;
+}

@@ -28,18 +28,39 @@ class AdminController extends AbstractController
         ];
         $this->contentNavigation = [
             'title' => 'Gestion',
-            'adminLinks' => [
+            'inUseRegex' => 'admin_base',
+            'specialLinks' => [
                 [
                     'label' => 'Articles',
                     'urlPath' => 'admin_articles_list'
                 ],
                 [
                     'label' => 'Rendez-vous',
-                    'urlPath' => 'admin'
+                    'urlPath' => 'admin_rendez_vous_list'
+                ],
+                [
+                    'label' => 'Accompagnements en présentiel',
+                    'urlPath' => 'admin_presential_accompaniments_list'
+                ],
+                [
+                    'label' => 'Formations à distance',
+                    'urlPath' => 'admin_distance_learnings_list'
+                ],
+                [
+                    'label' => 'Recettes',
+                    'urlPath' => 'admin_recipes_list'
+                ],
+                [
+                    'label' => 'Articles nourriture',
+                    'urlPath' => 'admin_food_articles_list'
+                ],
+                [
+                    'label' => 'produits',
+                    'urlPath' => 'admin_products_list'
                 ],
                 [
                     'label' => 'Lettres d\'informations',
-                    'urlPath' => 'admin'
+                    'urlPath' => 'admin_newsletters_list'
                 ],
                 [
                     'label' => 'Corbeille',
@@ -50,7 +71,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/gestion", name="admin")
      */
     public function index(): Response
     {

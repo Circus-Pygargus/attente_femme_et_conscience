@@ -1,0 +1,63 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app_admin_publish') }}
+{% endblock %}
+
+{% block adminContent %}
+<h2 class="title">Gérer les rendez-vous</h2>
+
+<div><a href="{{ path('admin_rendez_vous_create') }}" class="btn btn-inverted">Créer</a></div>
+
+<div style="display:none">
+    {{ form_start(rendezVousPublishForm) }}
+    {{ form_widget(rendezVousPublishForm.slug) }}
+    {{ form_widget(rendezVousPublishForm.published) }}
+    {{ form_end(rendezVousPublishForm) }}
+</div>
+
+{% if lastRendezVousMessage is defined %}
+    <p class="article-published">{{ lastRendezVousMessage|raw }}</p>
+{% endif %}
+
+    {%  if allRendezVous|length > 0 %}
+<table class="table">
+    <thead>
+    <tr>
+        <th class="modify">Modifier</th>
+        <th>Publier</th>
+        <th>Supprimer</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for rendezVous in allRendezVous %}
+    <tr class="element">
+        <td class="element-title">
+            <a
+                    href="{{ path('admin_rendez_vous_edit', {
+                        slug: rendezVous.slug
+                    }) }}"
+            >
+                {{ rendezVous.title }}
+            </a>
+        </td>
+        <td>
+            <div
+                    class="element-published"
+                    data-published="{% if rendezVous.published %}1{% else %}0{% endif %}"
+                    data-slug="{{ rendezVous.slug }}"
+            ></div>
+        </td>
+        <td class="element-delete">
+            <a href="#">X</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+        {{ knp_pagination_render(allRendezVous) }}
+    {% else %}
+        <p class="empty-array">Il n'y a aucun rendez-vous enregistré.</p>
+    {% endif %}
+{% endblock %}

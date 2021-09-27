@@ -1,0 +1,65 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app_admin_publish') }}
+{% endblock %}
+
+{% block adminContent %}
+<h2 class="title">Gérer les accompagnements en présentiel</h2>
+
+<div><a href="{{ path('admin_distance_learnings_create') }}" class="btn btn-inverted">Créer</a></div>
+
+<div style="display:none">
+    {{ form_start(presentialAccompanimentPublishForm) }}
+    {{ form_widget(presentialAccompanimentPublishForm.slug) }}
+    {{ form_widget(presentialAccompanimentPublishForm.published) }}
+    {{ form_end(presentialAccompanimentPublishForm) }}
+</div>
+
+{% if lastPresentialAccompanimentMessage is defined %}
+    <p class="article-published">{{ lastPresentialAccompanimentMessage|raw }}</p>
+{% endif %}
+
+    {%  if presentialAccompaniments|length > 0 %}
+<table class="table">
+    <thead>
+    <tr>
+        <th class="modify">Modifier</th>
+        <th>Publier</th>
+        <th>Supprimer</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for presentialAccompaniment in presentialAccompaniments %}
+        <tr class="element">
+            <td class="element-title">
+                <a
+                        href="{{ path('admin_presential_accompaniments_edit', {
+                            slug: presentialAccompaniment.slug
+                        }) }}"
+                >
+                    {{ presentialAccompaniment.title }}
+                </a>
+            </td>
+            <td>
+                <div
+                        class="element-published"
+                        data-published="{% if presentialAccompaniment.published %}1{% else %}0{% endif %}"
+                        data-slug="{{ presentialAccompaniment.slug }}"
+                ></div>
+            </td>
+            <td class="element-delete">
+                <a href="#">X</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+        {{ knp_pagination_render(presentialAccompaniments) }}
+    {% else %}
+        <p class="empty-array">Il n'y a aucun accompagnement en présentiel enregistré.</p>
+    {% endif %}
+{% endblock %}
+
+

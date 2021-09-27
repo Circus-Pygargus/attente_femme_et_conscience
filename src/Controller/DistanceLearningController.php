@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Repository\Traits\AccompanimentAndFormationTrait;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -38,7 +40,10 @@ class DistanceLearningController extends AbstractController
     /**
      * @Route("/formations-a-distance", name="distance-learning")
      */
-    public function list (): Response
+    public function list (
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response
     {
 //        $contentNavigation = [
 //            'title' => 'Accompagnements & Formations',
@@ -84,16 +89,35 @@ class DistanceLearningController extends AbstractController
 //            ]
 //        ];
         $content = [
-            'page' => 'Formations à distance',
-            'list' => [
-                0 => [
-                    'title' => 'Distance 1'
-                ],
-                1 => [
-                    'title' => 'Distance 2'
-                ]
+            'page' => 'Les formations à distance',
+            'noContentMsg' => 'Pas de formation à distance prévue pour le moment.',
+            'subLayout' => 'distance-learning.html.twig',
+//            'list' => [
+//                0 => [
+//                    'title' => 'Distance 1'
+//                ],
+//                1 => [
+//                    'title' => 'Distance 2'
+//                ]
+//            ]
+        ];
+
+        $distanceLearningsData = [
+            0 => [
+                'slug' => 'distance_1',
+                'title' => 'Distance 1'
+            ],
+            1 => [
+                'slug' => 'distance_2',
+                'title' => 'Distance 2'
             ]
         ];
+
+        $content['list'] = $paginator->paginate(
+            $distanceLearningsData, // Requête contenant les données à paginer
+            $request->query->getInt('page', 1), // Numéro de la page demandée via url, 1 si aucune page
+            2 // le nombre d'articles par page
+        );
 
         return $this->render('blog-content/index.html.twig', [
             'heroImgName' => $this->heroImgName,

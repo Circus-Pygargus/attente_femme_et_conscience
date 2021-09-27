@@ -47,4 +47,72 @@ class ArticleRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    /**
+     * Retourne une liste d'infos concernant les articles pour les admins
+     * (slug, titre, publié)
+     */
+    public function getArticlesAdminList (): array
+    {
+        $dql = $this->createQueryBuilder('a')
+            ->select('a.slug, a.title, a.published')
+            ->orderBy('a.createdAt', 'DESC');
+
+        $query = $dql->getQuery();
+
+        return $query->execute();
+    }
+
+    /**
+     * Retourne une liste d'infos concernant les articles pour les utilisateurs
+     * (slug, titre, image, extrait)
+     */
+    public function getArticlesList (): array
+    {
+        $dql = $this->createQueryBuilder('a')
+            ->select('a.slug, a.title')
+            ->where('a.published = 1')
+            ->orderBy('a.createdAt', 'DESC');
+
+        $query = $dql->getQuery();
+
+        return $query->execute();
+    }
+
+    /**
+     * Retourne une liste d'infos concernant les articles pour les utilisateurs
+     * à utiliser dans la colonne de navigation
+     * (slug, titre)
+     */
+    public function getArticlesNavigationList (): array
+    {
+        $dql = $this->createQueryBuilder('a')
+            ->select('a.slug, a.title')
+            ->where('a.published = 1')
+            ->orderBy('a.createdAt', 'DESC')
+            ->setMaxResults(3);
+
+        $query = $dql->getQuery();
+
+        return $query->execute();
+    }
+
+    /**
+     * Retourne le dernier article
+     */
+    public function getLastArticle (): Article
+    {
+        $dql = $this->createQueryBuilder('a')
+            ->select('a.slug, a.title, a.featuredImage, a.content')
+            ->where('a.published = 1')
+            ->orderBy('a.createdAt', 'DESC')
+            ->setMaxResults(1);
+
+        $query = $dql->getQuery();
+
+        $toto = $query->execute();
+        dd($toto);
+        return $toto;
+    }
 }

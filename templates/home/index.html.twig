@@ -6,6 +6,11 @@
     {{ encore_entry_link_tags('css/home') }}
 {%  endblock %}
 
+{% block javascripts %}
+    {{ parent(ds) }}
+    {{ encore_entry_script_tags('app_home') }}
+{% endblock %}
+
 
 {% block body %}
     {% include "_layouts/header.html.twig" %}
@@ -37,11 +42,18 @@
         </div>
         <div class="last-article u-margin-bottom-medium">
             <div class="last-article--box">
-                <img src="{{ asset( 'build/img/' ~ lastArticle.image ) }}" class="last-article--img">
+{#                <img src="{{ asset( 'uploads/images/mise-en-avant/' ~ lastArticle.featuredImage ) }}" class="last-article--img"> #}
+                <div class="last-article--img-container">
+                    <img
+                        src="{{ vich_uploader_asset(lastArticle, 'imageFile')|imagine_filter('mise_en_avant') }}"
+                        alt="{{ lastArticle.featuredImageAlt }}"
+                        class="last-article--img-container--img"
+                    >
+                </div>
                 <div class="last-article--sub-title">Dernier article</div>
                 <div class="last-article--separator"></div>
                 <div class="last-article--title">{{ lastArticle.title }}</div>
-                <p class="last-article--excerpt">{{ lastArticle.excerpt }}</p>
+                <p class="last-article--excerpt">{{ lastArticle.content|striptags|raw > 350 ? lastArticle.content|striptags|raw|slice(0, 351)|split(' ')|slice(0, -1)|join(' ') ~ '…' : lastArticle.content|striptags|raw }}</p>
                 <a class="btn btn-dark">Lire la suite !</a>
             </div>
         </div>

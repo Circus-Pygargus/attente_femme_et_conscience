@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Femme et conscience compte utilisateur{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/account') }}
+{%  endblock %}
+
+{% block body %}
+    {% include '_layouts/header.html.twig' %}
+
+<div class="hero" style="background-image: url({{ asset('build/img/' ~ heroImgName) }}"></div>
+
+    <section class="section">
+        <div class="main-content">
+            <div class="sub-huge">
+                {% include '_layouts/navigation-infos.html.twig' %}
+                {% block accountContent %}
+                    <h2>Bienvenue dans la page de gestion de votre compte</h2>
+                {% endblock %}
+            </div>
+            <div class="sub-small">
+                {% include '_layouts/content-navigation.html.twig' %}
+            </div>
+        </div>
+    </section>
+
+    {% include '_layouts/footer.html.twig' %}
+{% endblock %}

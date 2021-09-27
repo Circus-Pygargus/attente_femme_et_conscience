@@ -1,0 +1,23 @@
+{% include 'base.html.twig' %}
+
+{#{% block title %}Femme et conscience{% endblock %}#}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('css/error-page') }}
+{%  endblock %}
+
+{% block body %}
+    {% include '_layouts/header.html.twig' %}
+
+    <div class="error-container">
+        <div class="error-div">
+            <div class="error-div_space-modulator"></div>
+
+            <p class="error-div-message">{{ specialErrorMessage }}</p>
+
+            <div class="error-div_space-modulator"></div>
+        </div>
+    </div>
+
+    {% include '_layouts/footer.html.twig' %}
+{%  endblock %}

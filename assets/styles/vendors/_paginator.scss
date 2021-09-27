@@ -1,0 +1,31 @@
+.pagination {
+  margin-top: 2rem;
+
+  span:not(:first-child) {
+    margin-left: 1rem;
+  }
+
+  .current {
+    color: $color-primary-dark;
+  }
+
+  .first a,
+  .previous a,
+  .page a,
+  .next a,
+  .last a {
+    color: $color-primary-light;
+
+    &:visited {
+      color: $color-primary-light;
+    }
+
+    &:hover {
+      color: $color-primary-dark;
+    }
+
+    &:active {
+      color: $color-grey;
+    }
+  }
+}

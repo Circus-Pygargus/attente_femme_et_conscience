@@ -9,4 +9,13 @@
 // import './styles/scss/app.scss';
 
 // start the Stimulus application
-import './bootstrap';
+// import './bootstrap';
+
+window.addEventListener('load', () => {
+    const lastArticleBox = document.querySelector('.last-article--box');
+    const lastArticleImgCont = document.querySelector('.last-article--img-container');
+    let imgHeight = lastArticleImgCont.offsetHeight;
+    let imgWidth = imgHeight * 6/7;
+    lastArticleImgCont.style.width = imgWidth + 'px';
+    lastArticleBox.style.paddingLeft = imgWidth + 30 + 'px';
+});

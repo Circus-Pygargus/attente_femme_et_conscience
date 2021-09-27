@@ -1,0 +1,67 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app_admin_send_newsletter') }}
+{% endblock %}
+
+
+{% block adminContent %}
+<h2 class="title">Gérer les newsletters</h2>
+
+<div><a href="{{ path('admin_newsletters_create') }}" class="btn btn-inverted">Créer</a></div>
+
+<div style="display:none">
+    {{ form_start(newsletterIsSentForm) }}
+    {{ form_widget(newsletterIsSentForm.slug) }}
+    {{ form_widget(newsletterIsSentForm.isSent) }}
+    {{ form_end(newsletterIsSentForm) }}
+</div>
+
+{% if lastNewsletterMessage is defined %}
+    <p class="article-published">{{ lastNewsletterMessage|raw }}</p>
+{% endif %}
+
+    {%  if allNewsletters|length > 0 %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="modify">Modifier</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for newsletter in allNewsletters %}
+                <tr class="element">
+                    <td class="element-title">
+                        <a
+                                href="{{ path('admin_newsletters_edit', {
+                                    slug: newsletter.slug
+                                }) }}"
+                        >
+                            {{ newsletter.title }}
+                        </a>
+                    </td>
+                    <td class="element-isSent">
+                        {% if newsletter.isSent %}
+                            <div class="element-isSent--false">
+                                Envoyée
+                            </div>
+                        {% else %}
+                            <div
+                                class="btn btn-ultra-light send-newsletter"
+                                data-slug="{{ newsletter.slug }}"
+                            >
+                                Envoyer
+                            </div>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {{ knp_pagination_render(allNewsletters) }}
+    {% else %}
+        <p class="empty-array">Il n'y a aucune newsletter enregistrée.</p>
+    {% endif %}
+{% endblock %}

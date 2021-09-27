@@ -1,0 +1,80 @@
+// All forms
+.form {
+  .alert-danger {
+    color: #c40000;
+  }
+
+  &-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 1.8rem;
+
+    input {
+      width: 50%;
+      line-height: 3rem;
+      margin-left: 1.8rem;
+      padding-left: 1rem;
+      color: $color-primary-light;
+      border: 1px solid $color-primary-light;
+
+      &:focus {
+        border-color: $color-primary-dark;
+        outline: none;
+      }
+    }
+  }
+}
+
+// Only WYSIWYGs
+.wysiwyg-form {
+
+  .error {
+    text-align: right;
+    color: #ba0101;
+  }
+
+  .form-group {
+    display: block;
+
+    label:not(.cloned) {
+      display: block;
+      margin-bottom: .5rem;
+      margin-top: 3rem;
+      color: $color-primary-dark;
+    }
+
+    // Upload image file btn
+    label.cloned {
+      margin-bottom: 1.5rem;
+    }
+
+    input {
+      width: 100%;
+      margin-left: 0;
+      color: $color-primary-dark;
+    }
+  }
+
+  .checkboxes-form-group {
+
+    div:not(.error) {
+
+      label {
+        display:inline-block;
+        text-transform: capitalize;
+        margin-top: 0;
+        margin-left: 1rem;
+
+        &:not(last-of-type) {
+          margin-right: 5rem;
+        }
+      }
+
+      input {
+        width: auto;
+      }
+    }
+  }
+}

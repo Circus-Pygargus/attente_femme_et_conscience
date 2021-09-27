@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,13 +13,22 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(): Response
+    public function index(
+        ArticleRepository $articleRepository
+    ): Response
     {
-        $lastArticle = [
-            'title' => 'Reprenons notre pouvoir',
-            'image' => 'valerie-rv.jpg',
-            'excerpt' => 'À nos grand-mères… À celles qui n’ont pas enfanté et qui ne sont pas moins Femme, car elles portent en elles, cette essence, qui fait que par nature, elles ont cette capacité de donner cet Amour Universel. Aux hommes qui cherchent, à comprendre la nature féminine ...'
-        ];
+//        $lastArticle = [
+//            'title' => 'Reprenons notre pouvoir',
+//            'image' => 'valerie-rv.jpg',
+//            'excerpt' => 'À nos grand-mères… À celles qui n’ont pas enfanté et qui ne sont pas moins Femme, car elles portent en elles, cette essence, qui fait que par nature, elles ont cette capacité de donner cet Amour Universel. Aux hommes qui cherchent, à comprendre la nature féminine ...'
+//        ];
+        // l'extrait de l'article est filtré via twig
+//        $lastArticle = $articleRepository->getLastArticle();
+        $lastArticle = $this->getDoctrine()
+            ->getRepository(Article::class)
+            ->findOneBy(['published' => true], ['createdAt' => 'DESC']);
+//        dd($lastArticle);
+        $lastArticle->setContent(html_entity_decode($lastArticle->getContent()));
         $rendezVousList = [
             [
                 'img' => 'valerie-rv.jpg',

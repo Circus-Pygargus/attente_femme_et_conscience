@@ -1,0 +1,62 @@
+{{ form_start(recipeForm, {
+    'attr': {
+        'novalidate': 'novalidate',
+        'class': 'form wysiwyg-form'
+    }
+}) }}
+<div class="error">
+    {{ form_errors(recipeForm) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(recipeForm.title) }}
+    <div class="error">
+        {{ form_errors(recipeForm.title) }}
+    </div>
+    {{ form_widget(recipeForm.title) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(recipeForm.imageFile) }}
+    <div class="error">
+        {{ form_errors(recipeForm.imageFile) }}
+    </div>
+    {{ form_widget(recipeForm.imageFile) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(recipeForm.featuredImageAlt) }}
+    <div class="error">
+        {{ form_errors(recipeForm.featuredImageAlt) }}
+    </div>
+    {{ form_widget(recipeForm.featuredImageAlt) }}
+</div>
+
+<div class="form-group checkboxes-form-group">
+    {{ form_label(recipeForm.category) }}
+    <div class="error">
+        {{ form_errors(recipeForm.category) }}
+    </div>
+    {{ form_widget(recipeForm.category) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(recipeForm.keyWordsString) }}
+    <div class="error">
+        {{ form_errors(recipeForm.keyWordsString) }}
+    </div>
+    {{ form_widget(recipeForm.keyWordsString) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(recipeForm.content) }}
+    <div class="error">
+        {{ form_errors(recipeForm.content) }}
+    </div>
+    {{ form_widget(recipeForm.content) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_row(recipeForm.submit) }}
+</div>
+{{ form_end(recipeForm) }}

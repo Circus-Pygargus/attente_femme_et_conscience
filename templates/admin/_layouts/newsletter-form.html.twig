@@ -1,0 +1,30 @@
+{{ form_start(newsletterForm, {
+    'attr': {
+        'novalidate': 'novalidate',
+        'class': 'form wysiwyg-form'
+    }
+}) }}
+<div class="error">
+    {{ form_errors(newsletterForm) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(newsletterForm.title) }}
+    <div class="error">
+        {{ form_errors(newsletterForm.title) }}
+    </div>
+    {{ form_widget(newsletterForm.title) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(newsletterForm.content) }}
+    <div class="error">
+        {{ form_errors(newsletterForm.content) }}
+    </div>
+    {{ form_widget(newsletterForm.content) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_row(newsletterForm.submit) }}
+</div>
+{{ form_end(newsletterForm) }}

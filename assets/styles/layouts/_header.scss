@@ -5,7 +5,7 @@
     justify-content: space-between;
     align-items: center;
     height: 3rem;
-    padding: 0 1.5rem;
+    padding-left: 1.5rem;
     background-color: $color-primary-light;
     text-transform: uppercase;
     color: $color-primary-ultra-light;
@@ -15,12 +15,26 @@
     a:visited {
       cursor: pointer;
       transition: all .5s;
+      line-height: 3rem;
       color: $color-primary-ultra-light;
+
+      &.connected {
+        color: $color-primary-light;
+        background-color: $color-white;
+
+        &:hover {
+          color: $color-primary-dark;
+        }
+      }
     }
 
     div span:hover,
     a:hover {
       color: $color-primary-dark;
+    }
+
+    #connexion {
+      padding: 0 1.5rem;
     }
   }
 

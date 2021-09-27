@@ -4,7 +4,11 @@
     {% if contentNavigation.categories is defined %}
         {%  for category in contentNavigation.categories %}
             <div class="category">
+                {%  if category.linkAddSlug is defined %}
+                <a href="{{ path(category.link, {slug: category.linkAddSlug}) }}"
+                {% else %}
                 <a href="{{ path(category.link) }}"
+                {% endif %}
                     class="link category-link
                     {% if content.page is defined and content.page == category.name %}
                         selected
@@ -15,7 +19,11 @@
                 </a>
                 {% if category.links is defined %}
                 {% for element in category.links %}
+                    {% if category.urlPathForLinks is defined %}
+                    <a href="{{ path(category.urlPathForLinks, {categorySlug: category.linkAddSlug, elementSlug: element.slug}) }}"
+                    {% else %}
                     <a href="{{ path(category.link, {slug: element.slug}) }}"
+                    {% endif %}
                         class="link
                         {% if content.slug is defined and element.slug == content.slug %}
                              selected
@@ -28,11 +36,11 @@
                 {% endif %}
             </div>
         {% endfor %}
-    {% elseif contentNavigation.adminLinks is defined %}
-        {% for link in contentNavigation.adminLinks %}
+    {% elseif contentNavigation.specialLinks is defined %}
+        {% for link in contentNavigation.specialLinks %}
             <a href="{{ path(link.urlPath) }}"
                 class="link
-                {% if navigationInfos|last.urlPath == link.urlPath %}
+                {% if link.urlPath starts with contentNavigation.inUseRegex %}
                     selected
                 {% endif %}
                 "

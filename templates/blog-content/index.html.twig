@@ -24,14 +24,15 @@
                 {% else %}
                     {{ content.noContentMsg }}
                 {% endfor %}
+                    {{ knp_pagination_render(content.list) }}
                 </div>
             {% else %}
                 <div class="element-details">
                     {% if content.category is defined %}
                         <span class="category">{{ content.category }}</span>
                     {% endif %}
-                    <h2 class="title">{{ content.title }}</h2>
-                    <div class="content">{{ content.text | raw }}</div>
+                    <h2 class="title">{{ content.element.title }}</h2>
+                    <div class="content">{{ content.element.content | raw }}</div>
                     {% if content.reservationLink is defined %}
                         <a href="{{ content.reservationLlink }}" class="btn btn-dark">Reserver</a>
                     {% endif %}

@@ -1,0 +1,62 @@
+{{ form_start(presentialAccompanimentForm, {
+    'attr': {
+        'novalidate': 'novalidate',
+        'class': 'form wysiwyg-form'
+    }
+}) }}
+<div class="error">
+    {{ form_errors(presentialAccompanimentForm) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(presentialAccompanimentForm.title) }}
+    <div class="error">
+        {{ form_errors(presentialAccompanimentForm.title) }}
+    </div>
+    {{ form_widget(presentialAccompanimentForm.title) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(presentialAccompanimentForm.imageFile) }}
+    <div class="error">
+        {{ form_errors(presentialAccompanimentForm.imageFile) }}
+    </div>
+    {{ form_widget(presentialAccompanimentForm.imageFile) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(presentialAccompanimentForm.featuredImageAlt) }}
+    <div class="error">
+        {{ form_errors(presentialAccompanimentForm.featuredImageAlt) }}
+    </div>
+    {{ form_widget(presentialAccompanimentForm.featuredImageAlt) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(presentialAccompanimentForm.totalPlacesNb) }}
+    <div class="error">
+        {{ form_errors(presentialAccompanimentForm.totalPlacesNb) }}
+    </div>
+    {{ form_widget(presentialAccompanimentForm.totalPlacesNb) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(presentialAccompanimentForm.keyWordsString) }}
+    <div class="error">
+        {{ form_errors(presentialAccompanimentForm.keyWordsString) }}
+    </div>
+    {{ form_widget(presentialAccompanimentForm.keyWordsString) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_label(presentialAccompanimentForm.content) }}
+    <div class="error">
+        {{ form_errors(presentialAccompanimentForm.content) }}
+    </div>
+    {{ form_widget(presentialAccompanimentForm.content) }}
+</div>
+
+<div class="form-group" data-children-count="1">
+    {{ form_row(presentialAccompanimentForm.submit) }}
+</div>
+{{ form_end(presentialAccompanimentForm) }}
